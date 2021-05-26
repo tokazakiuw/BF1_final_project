@@ -37,4 +37,25 @@ server <- shinyServer(function(input, output, session) {
     
   })
   
+  # Render Summary
+  output$summary <- renderText({
+    
+    
+    
+  })
+  
+  # Render About Us
+  output$about_us <- renderText({
+    
+    
+    
+  })
+  
+  # Render Sources
+  output$sources <- renderText({
+    
+    
+    
+  })
+  
 })
