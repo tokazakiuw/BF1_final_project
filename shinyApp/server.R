@@ -26,8 +26,13 @@ server <- shinyServer(function(input, output, session) {
   # Render Map
   output$map <- renderLeaflet({
     
-    
-    
+    chd_stroke_data %>% 
+      filter(Year >= input$Year[1] & Year <= input$Year[2]) %>% 
+      filter(LocationAbbr == input$State) %>% 
+    leaflet() %>% 
+      addTiles() %>% 
+      addCircles(lng = ~X_long, lat = ~Y_lat,
+                 popup = ~LocationDesc) 
   })
   
   # Render Table

@@ -19,7 +19,16 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       
-      #
+      # Select Year Range
+      sliderInput(inputId = "Year", label = "Select Year Range",
+                  min = min(chd_stroke_data$Year), max = max(chd_stroke_data$Year),
+                  value = c(min(chd_stroke_data$Year), max(chd_stroke_data$Year)),
+                  sep = ""),
+      
+      # Select State
+      selectInput(inputId = "State", label = "Select State",
+                  choices = unique(chd_stroke_data$LocationAbbr),
+                  selected = "WA"),
       
     ),
     mainPanel(

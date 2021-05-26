@@ -62,3 +62,9 @@ hd_mortality_1315 <- read.csv("data/Heart Disease/Heart_Disease_Mortality_Data_A
 ## Stroke Mortality Merge
 
 ## Heart Disease Mortality Merge
+
+# Type Conversion
+# Convert Year from character type to numeric type
+chd_stroke_data$Year <- as.numeric(chd_stroke_data$Year)
+chd_stroke_data <- na.omit(chd_stroke_data)
+unique(chd_stroke_data$Year)
