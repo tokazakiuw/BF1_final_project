@@ -68,9 +68,10 @@ hd_mortality_14 <- read.csv("data/Heart Disease/Heart_Disease_Mortality_Data_Amo
 
 ## Consolidate Data by Merging Over Year Range
 ## Stroke Mortality Merge
-
+stroke_mortality_combined <- bind_rows(stroke_mortality_14, stroke_mortality_15, stroke_mortality_16, stroke_mortality_17, stroke_mortality_18)
 
 ## Heart Disease Mortality Merge
+hd_mortality_combined <- bind_rows(hd_mortality_14, hd_mortality_15, hd_mortality_16, hd_mortality_17, hd_mortality_18)
 
 # Type Conversion
 # Convert Year from character type to numeric type
