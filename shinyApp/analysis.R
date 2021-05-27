@@ -1,10 +1,8 @@
 # Load Packages
 library(shiny)
-library(dplyr)
-library(ggplot2)
 library(leaflet)
 library(tidyverse)
-library(tidyr)
+library(maps)
 
 ## Create Directory for Data Sets
 dir.create("shinyApp/data", showWarnings=FALSE)
@@ -81,5 +79,4 @@ unique(chd_stroke_data$Year)
 
 ## Clean Heart Disease Mortality Data
 # Seperate Location.1 Latitude and Longitude
-hd_mortality_combined <- hd_mortality_combined %>% 
-    separate(Location.1, c("Y_lat", "X_lon"), ",")
+hd_mortality_combined <- hd_mortality_combined
