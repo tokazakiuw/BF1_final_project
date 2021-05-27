@@ -26,7 +26,11 @@ server <- shinyServer(function(input, output, session) {
   # Render Map
   output$map <- renderLeaflet({
     
-    chd_stroke_data %>% 
+    # Seperate Location.1 Latitude and Longitude
+    hd_mortality_combined <- hd_mortality_combined %>% 
+      separate(Location.1, c("Y_lat", "X_lon"), ",")
+    
+    hd_mortality_combined %>% 
       filter(Year >= input$Year[1] & Year <= input$Year[2]) %>% 
       filter(LocationAbbr == input$State) %>% 
     leaflet() %>% 

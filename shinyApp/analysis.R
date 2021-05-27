@@ -79,3 +79,7 @@ chd_stroke_data$Year <- as.numeric(chd_stroke_data$Year)
 chd_stroke_data <- na.omit(chd_stroke_data)
 unique(chd_stroke_data$Year)
 
+## Clean Heart Disease Mortality Data
+# Seperate Location.1 Latitude and Longitude
+hd_mortality_combined <- hd_mortality_combined %>% 
+    separate(Location.1, c("Y_lat", "X_lon"), ",")
