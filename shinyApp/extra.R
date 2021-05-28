@@ -1,5 +1,7 @@
 ## Extra Libraries
+library(rgdal)
 library(sf)
+library(maps)
 
 ## Extra Datasets
 
@@ -83,3 +85,11 @@ colnames(UScounty)[colnames(UScounty) == "GEOID"] <- "LocationID"
 UScounty$LocationID <- as.numeric(UScounty$LocationID)
 ## Merge with County Boundary Data
 hd_mortality <- left_join(hd_mortality_combined, UScounty, by = "LocationID")
+
+## Test County Code
+hd_mortality %>% 
+  leaflet() %>% 
+  addTiles %>% 
+  addPolygons(data = hd_mortality) %>% 
+  addCircles(lng = ~X_lon, lat = ~Y_lat,
+             popup = ~LocationDesc)
