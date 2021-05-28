@@ -96,12 +96,27 @@ test1_df$sample_x <- gsub("^.", "", test1_df$sample_x)
 ## Filter out last character
 test1_df$sample_y <- gsub(".$", "", test1_df$sample_y)
 
+## Using County from Maps Library
+mergeCounty <- map_data("county")
+mergeCounty$subregion <- paste(mergeCounty$subregion, "County")
+mergeCounty$subregion <- str_to_title(mergeCounty$subregion)
+mergeCounty <- mergeCounty %>% 
+  select(long, lat, subregion, region)
+## Check Unique Values
+unique(mergeCounty$subregion)
+unique(hd_mortality_combined$LocationDesc)
+  
 
 ## Separate Location.1 Latitude and Longitude
 hd_mortality_combined$Location.1 <-  gsub("^.|.$", "", hd_mortality_combined$Location.1)
 ## Separate Location.1
-hd_mortality_combined <- hd_mortality_combined %>% 
-  separate(Location.1, c("Y_lat", "X_lon"), ", ")
+hd_mortality_combined <- hd_mortality_combined %>%
+  separate(Location.1, c("Y_lat1", "X_lon1"), ", ")
+## Unique Values
+hd_mortality_combined %>% 
+  filter(LocationDesc == "Wade Hampton") %>% 
+  glimpse()
+
 ## Convert to Numeric Value 
 hd_mortality_combined$Y_lat <- as.numeric(hd_mortality_combined$Y_lat)
-hd_mortality_combined$X_lon <- as.numeric(hd_mortality_combined$X_lo)
+hd_mortality_combined$X_lon <- as.numeric(hd_mortality_combined$X_lon)
