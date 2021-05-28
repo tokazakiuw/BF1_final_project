@@ -24,12 +24,12 @@ ui <- fluidPage(
       
       # Select Year Range
       sliderInput(inputId = "Year", label = "Select Year Range",
-                  min = min(chd_stroke_data$Year), max = max(chd_stroke_data$Year),
-                  value = min(chd_stroke_data$Year)),
+                  min = 2014, max = 2018,
+                  value = 2014),
       
       # Select State
       selectInput(inputId = "State", label = "Select State",
-                  choices = unique(chd_stroke_data$LocationAbbr),
+                  choices = unique(hd_mortality_combined$LocationAbbr),
                   selected = "WA"),
       
     ),

@@ -29,12 +29,12 @@ server <- shinyServer(function(input, output, session) {
   output$map <- renderLeaflet({
     
     hd_mortality_combined %>% 
-      filter(Year >= input$Year[1] & Year <= input$Year[2]) %>% 
+      filter(Year == input$Year) %>% 
       filter(LocationAbbr == input$State) %>% 
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~LocationDesc) 
+                 popup = ~LocationDesc)
   })
   
   # Render Table

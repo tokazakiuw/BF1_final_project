@@ -50,11 +50,8 @@ stroke_mortality_combined <- bind_rows(stroke_mortality_14, stroke_mortality_15,
 ## Heart Disease Mortality Merge
 hd_mortality_combined <- bind_rows(hd_mortality_14, hd_mortality_15, hd_mortality_16, hd_mortality_17, hd_mortality_18)
 
-test_hd_mortality_combined <- hd_mortality_combined %>% 
+## Data Cleaning
+hd_mortality_combined <- hd_mortality_combined %>% 
   group_by(LocationAbbr, LocationDesc) %>% 
   fill(Y_lat, .direction = "downup") %>% 
   fill(X_lon, .direction = "downup")
-  
-## Convert to Numeric Value 
-hd_mortality_combined$Y_lat <- as.numeric(hd_mortality_combined$Y_lat)
-hd_mortality_combined$X_lon <- as.numeric(hd_mortality_combined$X_lon)

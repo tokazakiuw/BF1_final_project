@@ -1,3 +1,6 @@
+## Extra Libraries
+library(sf)
+
 ## Extra Datasets
 
 ## Coronary Heart Disease and Stroke Mortality Data
@@ -57,7 +60,6 @@ mergeCounty <- mergeCounty %>%
 unique(mergeCounty$subregion)
 unique(hd_mortality_combined$LocationDesc)
 
-
 ## Separate Location.1 Latitude and Longitude
 hd_mortality_combined$Location.1 <-  gsub("^.|.$", "", hd_mortality_combined$Location.1)
 ## Separate Location.1
@@ -68,3 +70,16 @@ test2 <- hd_mortality_combined %>%
   filter(LocationDesc == "Juneau") %>% 
   fill(Y_lat, .direction = "downup") %>% 
   fill(X_lon, .direction = "downup")
+
+## Convert to Numeric Value 
+hd_mortality_combined$Y_lat <- as.numeric(hd_mortality_combined$Y_lat)
+hd_mortality_combined$X_lon <- as.numeric(hd_mortality_combined$X_lon)
+
+## County Code
+## County Boundary File
+## https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html
+UScounty <- st_read(dsn = "data/cb_2018_us_county_500k/cb_2018_us_county_500k.shp")
+colnames(UScounty)[colnames(UScounty) == "GEOID"] <- "LocationID"
+UScounty$LocationID <- as.numeric(UScounty$LocationID)
+## Merge with County Boundary Data
+hd_mortality <- left_join(hd_mortality_combined, UScounty, by = "LocationID")
