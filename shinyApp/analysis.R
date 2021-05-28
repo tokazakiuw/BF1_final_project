@@ -82,7 +82,26 @@ chd_stroke_data <- na.omit(chd_stroke_data)
 unique(chd_stroke_data$Year)
 
 ## Clean Heart Disease Mortality Data
-# Seperate Location.1 Latitude and Longitude
+
+## NOTES - DEBUGGING CODE
+## Single Row
+test1_df <- hd_mortality_combined %>% 
+  filter(Year == 2014 & LocationDesc == "Polk County" & Data_Value == "486.3") %>% 
+  select(Location.1)
+## Separate Location.1
+test1_df <- test1_df %>%
+  separate(Location.1, c("sample_x", "sample_y"), ", ")
+## Filter out first character
+test1_df$sample_x <- gsub("^.", "", test1_df$sample_x)
+## Filter out last character
+test1_df$sample_y <- gsub(".$", "", test1_df$sample_y)
+
+
+## Separate Location.1 Latitude and Longitude
+hd_mortality_combined$Location.1 <-  gsub("^.|.$", "", hd_mortality_combined$Location.1)
+## Separate Location.1
 hd_mortality_combined <- hd_mortality_combined %>% 
-  separate(Location.1, c("Y_lat", "X_lon"), ",")
-## Filter out non-numeric values
+  separate(Location.1, c("Y_lat", "X_lon"), ", ")
+## Convert to Numeric Value 
+hd_mortality_combined$Y_lat <- as.numeric(hd_mortality_combined$Y_lat)
+hd_mortality_combined$X_lon <- as.numeric(hd_mortality_combined$X_lo)
