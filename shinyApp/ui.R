@@ -1,9 +1,12 @@
 # Load Packages
 library(shiny)
-library(dplyr)
-library(ggplot2)
+## library(dplyr)
+## library(ggplot2)
 library(leaflet)
 library(tidyverse)
+## library(tidyr)
+## library(stringr)
+library(maps)
 
 # Load Data
 cat("--working dir", getwd(), "\n")
@@ -21,13 +24,12 @@ ui <- fluidPage(
       
       # Select Year Range
       sliderInput(inputId = "Year", label = "Select Year Range",
-                  min = min(chd_stroke_data$Year), max = max(chd_stroke_data$Year),
-                  value = c(min(chd_stroke_data$Year), max(chd_stroke_data$Year)),
-                  sep = ""),
+                  min = 2014, max = 2018,
+                  value = 2014),
       
       # Select State
       selectInput(inputId = "State", label = "Select State",
-                  choices = unique(chd_stroke_data$LocationAbbr),
+                  choices = unique(hd_mortality_combined$LocationAbbr),
                   selected = "WA"),
       
     ),
@@ -40,8 +42,6 @@ ui <- fluidPage(
                   tabPanel("About Us", textOutput("about_us")),
                   tabPanel("Sources", textOutput("sources"))
                   )
-      
-      
     )
   )
 )
