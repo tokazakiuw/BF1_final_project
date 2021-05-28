@@ -6,7 +6,6 @@ library(leaflet)
 library(tidyverse)
 ## library(tidyr)
 ## library(stringr)
-library(maps)
 
 # Load Data
 cat("--working dir", getwd(), "\n")
@@ -33,7 +32,6 @@ server <- shinyServer(function(input, output, session) {
       filter(LocationAbbr == input$State) %>% 
     leaflet() %>% 
       addTiles() %>% 
-      addPolygons(data = county, lng = county$long, lat = county$lat) %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
                  popup = ~LocationDesc)
   })

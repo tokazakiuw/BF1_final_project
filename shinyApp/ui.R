@@ -6,7 +6,6 @@ library(leaflet)
 library(tidyverse)
 ## library(tidyr)
 ## library(stringr)
-library(maps)
 
 # Load Data
 cat("--working dir", getwd(), "\n")

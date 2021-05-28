@@ -6,7 +6,6 @@ library(leaflet)
 library(tidyverse)
 ## library(tidyr)
 ## library(stringr)
-library(maps)
 
 ## Create Directory for Data Sets
 dir.create("shinyApp/data", showWarnings=FALSE)
@@ -55,5 +54,4 @@ hd_mortality_combined <- hd_mortality_combined %>%
   group_by(LocationAbbr, LocationDesc) %>% 
   fill(Y_lat, .direction = "downup") %>% 
   fill(X_lon, .direction = "downup")
-
-county <- map_data("county")
+hd_mortality_combined$Data_Value <- as.numeric(hd_mortality_combined$Data_Value)
