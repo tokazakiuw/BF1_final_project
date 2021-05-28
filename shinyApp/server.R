@@ -33,6 +33,7 @@ server <- shinyServer(function(input, output, session) {
       filter(LocationAbbr == input$State) %>% 
     leaflet() %>% 
       addTiles() %>% 
+      addPolygons(data = county, lng = county$long, lat = county$lat) %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
                  popup = ~LocationDesc)
   })

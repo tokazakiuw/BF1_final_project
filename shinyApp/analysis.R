@@ -55,3 +55,5 @@ hd_mortality_combined <- hd_mortality_combined %>%
   group_by(LocationAbbr, LocationDesc) %>% 
   fill(Y_lat, .direction = "downup") %>% 
   fill(X_lon, .direction = "downup")
+
+county <- map_data("county")
