@@ -66,3 +66,23 @@ hd_mortality_combined <- hd_mortality_combined %>%
   fill(Y_lat, .direction = "downup") %>% 
   fill(X_lon, .direction = "downup")
 hd_mortality_combined$Data_Value <- as.numeric(hd_mortality_combined$Data_Value)
+#removing columns from hd_mortality_combined
+hd_mortality_combined=subset(hd_mortality_combined, select = -c(DataSource, 
+                              StratificationCategory1, StratificationCategory2,TopicID))
+#removing columns from stroke_mortality_combined 
+stroke_mortality_combined=subset(stroke_mortality_combined,select= -c(DataSource, 
+                                    StratificationCategory1, StratificationCategory2,TopicID))
+#renaming columns StratificationCategory1, StratificationCategory2, LocationAbbr from 
+#hd_mortality_combined
+hd_mortality_combined <- hd_mortality_combined %>% 
+  rename(Gender = Stratification1,
+         Ethnicity = Stratification2,
+        State = LocationAbbr)
+#renaming columns StratificationCategory1, StratificationCategory2, LocationAbbr from 
+#stroke_mortality_combined
+stroke_mortality_combined <- stroke_mortality_combined %>% 
+  rename(Gender = Stratification1,
+         Ethnicity = Stratification2,
+         State = LocationAbbr)
+
+

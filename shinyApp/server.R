@@ -26,7 +26,7 @@ server <- shinyServer(function(input, output, session){
 
     hd_mortality_combined %>% 
       filter(Year == input$Year) %>% 
-      filter(LocationAbbr == input$State) %>% 
+      filter(State == input$State) %>% 
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
@@ -34,12 +34,12 @@ server <- shinyServer(function(input, output, session){
   })
   
   # Render Table
-    output$table <-renderTable({
-      stroke.combined <- stroke_mortality_combined %>% 
-        select(Year, LocationAbbr, Data_Value, Stratification2,
-               Stratification1) 
-      stroke.combined
-      
+    output$data <- renderDataTable({
+  hd_mortality_combined
+    })
+   
+    output$data2 <- renderDataTable({
+    stroke_mortality_combined
     })
       
   # Render Summary

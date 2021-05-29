@@ -6,7 +6,7 @@ library(leaflet)
 library(tidyverse)
 ## library(tidyr)
 ## library(stringr)
-
+library(DT)
 # Load Data
 cat("--working dir", getwd(), "\n")
 
@@ -28,7 +28,8 @@ ui <- fluidPage(
       
       # Select State
       selectInput(inputId = "State", label = "Select State",
-                  choices = unique(hd_mortality_combined$LocationAbbr),
+                  choices = unique(hd_mortality_combined$State), 
+                                 
                   selected = "WA"),
       
     ),
@@ -36,7 +37,8 @@ ui <- fluidPage(
       tabsetPanel(type = "tab",
                   tabPanel("Graph", plotOutput("plot")),
                   tabPanel("Map", leafletOutput("map")),
-                  tabPanel("Table", tableOutput("table")),
+                  tabPanel("Heart Disease Mortality Table", dataTableOutput("data")),
+                  tabPanel("Stroke Mortality Table", dataTableOutput("data2")),
                   tabPanel("Summary", textOutput("summary")),
                   tabPanel("About Us", textOutput("about_us")),
                   tabPanel("Sources", textOutput("sources"))
