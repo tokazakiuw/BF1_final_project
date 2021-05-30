@@ -25,11 +25,17 @@ ui <- fluidPage(
                   min = 2014, max = 2018,
                   value = 2014),
       
+      # Select Heart Disease or Stroke
+      
+      
       # Select State
       selectInput(inputId = "State", label = "Select State",
                   choices = unique(hd_mortality_combined$State), 
-                                 
                   selected = "WA"),
+      
+      # Select County
+      selectInput(inputId = "County", label = "Select County",
+                  choices = "", selected = ""),
       
     ),
     mainPanel(

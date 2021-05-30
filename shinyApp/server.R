@@ -16,6 +16,12 @@ source("analysis.R")
 # Define Server
 
 server <- shinyServer(function(input, output, session){
+  # Reactive State Input
+  observeEvent(input$State, {
+    updateSelectInput(session, "County", "Select County",
+                      choices=hd_mortality_combined$LocationDesc[hd_mortality_combined$State==input$State])
+  })
+  
   # Render Graph
   output$plot <- renderPlot({
 
