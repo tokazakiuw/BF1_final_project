@@ -19,7 +19,8 @@ server <- shinyServer(function(input, output, session) {
   
   # Render Graph
   output$plot <- renderPlot({
-    
+    ggplot(stroke_mortality_combined,aes(x=Year,y=Data_Value)) +
+      geom_line()
     
     
   })
