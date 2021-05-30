@@ -16,6 +16,7 @@ source("analysis.R")
 # Define Server
 
 server <- shinyServer(function(input, output, session){
+ 
   # Render Graph
   output$plot <- renderPlot({
 

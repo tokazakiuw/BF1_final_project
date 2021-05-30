@@ -29,7 +29,7 @@ ui <- fluidPage(
       # Select State
       selectInput(inputId = "State", label = "Select State",
                   choices = unique(hd_mortality_combined$State), 
-                                 
+                  
                   selected = "WA"),
       
     ),
@@ -42,7 +42,7 @@ ui <- fluidPage(
                   tabPanel("Summary", textOutput("summary")),
                   tabPanel("About Us", textOutput("about_us")),
                   tabPanel("Sources", textOutput("sources"))
-                  )
+      )
     )
   )
 )
