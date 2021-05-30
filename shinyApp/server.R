@@ -15,21 +15,18 @@ source("analysis.R")
 
 # Define Server
 
-server <- shinyServer(function(input, output, session) {
-  
+server <- shinyServer(function(input, output, session){
   # Render Graph
   output$plot <- renderPlot({
-    
-    
-    
+
   })
   
   # Render Map
   output$map <- renderLeaflet({
-    
+
     hd_mortality_combined %>% 
       filter(Year == input$Year) %>% 
-      filter(LocationAbbr == input$State) %>% 
+      filter(State == input$State) %>% 
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
@@ -37,30 +34,26 @@ server <- shinyServer(function(input, output, session) {
   })
   
   # Render Table
-  output$table <- renderTable({
-    
-    
-    
-  })
-  
+    output$data <- renderDataTable({
+  hd_mortality_combined
+    })
+   
+    output$data2 <- renderDataTable({
+    stroke_mortality_combined
+    })
+      
   # Render Summary
   output$summary <- renderText({
-    
-    
-    
   })
   
   # Render About Us
   output$about_us <- renderText({
     
-    
-    
+   
   })
   
   # Render Sources
   output$sources <- renderText({
-    
-    
     
   })
   
