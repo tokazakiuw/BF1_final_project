@@ -49,13 +49,6 @@ stroke_mortality_combined <- bind_rows(stroke_mortality_14, stroke_mortality_15,
 ## Heart Disease Mortality Merge
 hd_mortality_combined <- bind_rows(hd_mortality_14, hd_mortality_15, hd_mortality_16, hd_mortality_17, hd_mortality_18)
 
-
-# Type Conversion
-# Convert Year from character type to numeric type
-chd_stroke_data$Year <- as.numeric(chd_stroke_data$Year)
-chd_stroke_data <- na.omit(chd_stroke_data)
-unique(chd_stroke_data$Year)
-
 ## Clean Heart Disease Mortality Data
 # Separate Location.1 Latitude and Longitude
 
