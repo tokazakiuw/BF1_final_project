@@ -53,12 +53,17 @@ hd_mortality_combined <- bind_rows(hd_mortality_14, hd_mortality_15, hd_mortalit
 # Separate Location.1 Latitude and Longitude
 
 ## Data Cleaning
-
 hd_mortality_combined <- hd_mortality_combined %>% 
   group_by(LocationAbbr, LocationDesc) %>% 
   fill(Y_lat, .direction = "downup") %>% 
   fill(X_lon, .direction = "downup")
 hd_mortality_combined$Data_Value <- as.numeric(hd_mortality_combined$Data_Value)
+## Apply to Stroke
+stroke_mortality_combined <- stroke_mortality_combined %>% 
+  group_by(LocationAbbr, LocationDesc) %>% 
+  fill(Y_lat, .direction = "downup") %>% 
+  fill(X_lon, .direction = "downup")
+stroke_mortality_combined$Data_Value <- as.numeric(stroke_mortality_combined$Data_Value)
 #removing columns from hd_mortality_combined
 hd_mortality_combined=subset(hd_mortality_combined, select = -c(DataSource, 
                               StratificationCategory1, StratificationCategory2,TopicID))

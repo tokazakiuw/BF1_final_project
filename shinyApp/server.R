@@ -16,11 +16,6 @@ source("analysis.R")
 # Define Server
 
 server <- shinyServer(function(input, output, session){
-  # Reactive State Input
-  observeEvent(input$State, {
-    updateSelectInput(session, "County", "Select County",
-                      choices=hd_mortality_combined$LocationDesc[hd_mortality_combined$State==input$State])
-  })
   
   # Render Graph
   output$plot <- renderPlot({
@@ -30,6 +25,7 @@ server <- shinyServer(function(input, output, session){
   # Render Map
   output$map <- renderLeaflet({
 
+  if(input$Disease == "Heart Disease") {
     hd_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
@@ -37,16 +33,26 @@ server <- shinyServer(function(input, output, session){
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
                  popup = ~LocationDesc)
+  } else {
+    stroke_mortality_combined %>% 
+      filter(Year == input$Year) %>% 
+      filter(State == input$State) %>% 
+      leaflet() %>% 
+      addTiles() %>% 
+      addCircles(lng = ~X_lon, lat = ~Y_lat,
+                 popup = ~LocationDesc)
+  }
   })
   
   # Render Table
     output$data <- renderDataTable({
-  hd_mortality_combined
-    })
-   
-    output$data2 <- renderDataTable({
-    stroke_mortality_combined
-    })
+      
+      if(input$Disease == "Heart Disease") {
+        hd_mortality_combined
+      } else {
+        stroke_mortality_combined
+      }
+  })
       
   # Render Summary
   output$summary <- renderText({
