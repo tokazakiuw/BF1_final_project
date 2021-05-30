@@ -10,7 +10,6 @@ library(DT)
 # Load Data
 cat("--working dir", getwd(), "\n")
 
-
 # Source Data 
 source("analysis.R")
 
@@ -26,10 +25,14 @@ ui <- fluidPage(
                   min = 2014, max = 2018,
                   value = 2014),
       
+      # Select Heart Disease or Stroke
+      radioButtons(inputId = "Disease", label = "Select Disease Displayed",
+                   choices = c("Heart Disease", "Stroke"),
+                   selected = "Heart Disease"),
+      
       # Select State
       selectInput(inputId = "State", label = "Select State",
                   choices = unique(hd_mortality_combined$State), 
-                                 
                   selected = "WA"),
       
     ),
@@ -37,8 +40,7 @@ ui <- fluidPage(
       tabsetPanel(type = "tab",
                   tabPanel("Graph", plotOutput("plot")),
                   tabPanel("Map", leafletOutput("map")),
-                  tabPanel("Heart Disease Mortality Table", dataTableOutput("data")),
-                  tabPanel("Stroke Mortality Table", dataTableOutput("data2")),
+                  tabPanel("Disease Mortality Table", dataTableOutput("data")),
                   tabPanel("Summary", textOutput("summary")),
                   tabPanel("About Us", textOutput("about_us")),
                   tabPanel("Sources", textOutput("sources"))

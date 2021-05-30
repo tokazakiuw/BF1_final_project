@@ -30,6 +30,18 @@ nhanes_data <- read.csv("data/National_Health_and_Nutrition_Examination_Survey__
 ## Accessed via https://catalog.data.gov/dataset/national-vital-statistics-system-nvss-national-cardiovascular-disease-surveillance-data-ba4cb
 nvss_data <- read.csv("data/National_Vital_Statistics_System__NVSS__-_National_Cardiovascular_Disease_Surveillance_Data.csv")
 
+## Shiny CODE
+## UI CODE
+# Select County
+# selectInput(inputId = "County", label = "Select County",
+          #  choices = "", selected = "")
+## SERVER CODE
+# Reactive State Input
+#observeEvent(input$State, {
+  #updateSelectInput(session, "County", "Select County",
+                    #choices=hd_mortality_combined$LocationDesc[hd_mortality_combined$State==input$State])
+#})
+
 ## Extra Code
 # Type Conversion
 # Convert Year from character type to numeric type

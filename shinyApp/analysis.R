@@ -50,27 +50,28 @@ stroke_mortality_combined <- bind_rows(stroke_mortality_14, stroke_mortality_15,
 ## Heart Disease Mortality Merge
 hd_mortality_combined <- bind_rows(hd_mortality_14, hd_mortality_15, hd_mortality_16, hd_mortality_17, hd_mortality_18)
 
-
-# Type Conversion
-# Convert Year from character type to numeric type
-chd_stroke_data$Year <- as.numeric(chd_stroke_data$Year)
-chd_stroke_data <- na.omit(chd_stroke_data)
-unique(chd_stroke_data$Year)
-
 ## Clean Heart Disease Mortality Data
 # Separate Location.1 Latitude and Longitude
 
 ## Data Cleaning
-
 hd_mortality_combined <- hd_mortality_combined %>% 
   group_by(LocationAbbr, LocationDesc) %>% 
   fill(Y_lat, .direction = "downup") %>% 
   fill(X_lon, .direction = "downup")
 hd_mortality_combined$Data_Value <- as.numeric(hd_mortality_combined$Data_Value)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ## Dataframe for Line Plot
 =======
+=======
+## Apply to Stroke
+stroke_mortality_combined <- stroke_mortality_combined %>% 
+  group_by(LocationAbbr, LocationDesc) %>% 
+  fill(Y_lat, .direction = "downup") %>% 
+  fill(X_lon, .direction = "downup")
+stroke_mortality_combined$Data_Value <- as.numeric(stroke_mortality_combined$Data_Value)
+>>>>>>> origin
 #removing columns from hd_mortality_combined
 hd_mortality_combined=subset(hd_mortality_combined, select = -c(DataSource, 
                               StratificationCategory1, StratificationCategory2,TopicID))
