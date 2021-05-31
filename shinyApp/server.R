@@ -6,7 +6,7 @@ library(leaflet)
 library(tidyverse)
 ## library(tidyr)
 ## library(stringr)
-
+library(plotly)
 # Load Data
 cat("--working dir", getwd(), "\n")
 
@@ -21,75 +21,27 @@ server <- shinyServer(function(input, output, session){
 
   })
   
-  # Render Map Labels
-  output$label1 <- renderText({
-    paste0(input$Disease, " Mortality Rates for U.S. by States in Year: ", input$Year)
-  })
-  
   # Render Map
-  
-  output$map <- renderPlotly({
-  if(input$Disease == "Heart Disease") {
-  hd_plotly %>% 
-    filter(Year == input$Year) %>% 
-    filter(Gender == input$Gender) %>% 
-    plot_geo(locationmode = 'USA-states') %>% 
-    add_trace(locations = ~State,
-      z = ~Rate, color = ~Rate,
-      text = ~hover, hoverinfo = 'text') %>% 
-    layout(geo = list(scope = 'usa'))
-  } else {
-  stroke_plotly %>% 
-    filter(Year == input$Year) %>% 
-    filter(Gender == input$Gender) %>% 
-    plot_geo(locationmode = 'USA-states') %>% 
-    add_trace(locations = ~State,
-      z = ~Rate, color = ~Rate,
-      text = ~hover, hoverinfo = 'text') %>% 
-    layout(geo = list(scope = 'usa'))
-  }
-})
-  
-  # Render Leaflet Map Labels
-  output$label2 <- renderText({
-    paste0(input$Gender," ", input$Disease, " Mortality Rates for ",input$State, " State Counties in Year: ", input$Year)
-  })
-  
-  # Render Leaflet Map
-  output$lmap <- renderLeaflet({
+  output$map <- renderLeaflet({
 
   if(input$Disease == "Heart Disease") {
     hd_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
-      filter(Gender == input$Gender) %>% 
-      filter(!is.na(Data_Value)) %>% 
-      filter(GeographicLevel != "State") %>% 
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~paste(LocationDesc, input$Year, "-", input$Gender, "Heart Disease Mortality Rate of:", Data_Value, "(per 100,000 population)"),
-                 radius = ~Data_Value*20,
-                 color = ~hd_pal(Data_Value)) %>% 
-      addLegend(title = "Mortality Rate (#/100000 Pop)", pal =  hd_pal, value = ~Data_Value)
-    
+                 popup = ~LocationDesc)
   } else {
     stroke_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
-      filter(Gender == input$Gender) %>% 
-      filter(!is.na(Data_Value)) %>% 
-      filter(GeographicLevel != "State") %>% 
-    leaflet() %>% 
+      leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~paste(LocationDesc, input$Year, "-", input$Gender, "Stroke Mortality Rate of:", Data_Value, "(per 100,000 population)"),
-                 radius = ~Data_Value*20,
-                 color = ~stroke_pal(Data_Value)) %>% 
-      addLegend(title = "Mortality Rate (#/100000 Pop)", pal = stroke_pal, value = ~Data_Value)
-      
+                 popup = ~LocationDesc)
   }
-})
+  })
   
   # Render Table
     output$data <- renderDataTable({
@@ -103,25 +55,25 @@ server <- shinyServer(function(input, output, session){
   # Render Summary
   output$summary <- renderText({
     #What Ethnicity has the highest rate of mortality from heart disease
-    if(input$Disease == "Heart Disease"){
-     highestVar <-  hd_mortality_combined %>% 
-        select(Ethnicity, Data_Value,Year,State) %>% 
-        filter(Data_Value == max(Data_Value), 
-               Year == input$Year, 
-               State == input$State)
+    if(input$Disease == "Heart Disease"){ 
+      highestVar <- hd_mortality_combined %>%
+        filter(Year == input$Year) %>% 
+        filter(State == input$State) %>%
+        filter(Gender == input$Gender) %>%
+        group_by(Ethnicity) %>% 
+        summarize(highest = max(Data_Value))
      paste("The highest value for  heart disease by ethnicity is", highestVar)
-    }
-    else{stroke_mortality_combined %>% 
-      highestVar2 <- stroke_mortality_combined %>% 
-        select(Ethnicity, Data_Value, Year, State) %>% 
-      filter(Data_Value == max(Data_Value), 
-             Year == input$Year, 
-             State == input$State)
-    paste("The highest value for stroke by ethnicity is", highestVar2)
-    
   }
-  })
-  
+    else{ 
+      highestVar2 <- stroke_mortality_combined %>% 
+            filter(Year == input$Year) %>% 
+            filter(State == input$State) %>%
+            filter(Gender == input$Gender) %>% 
+            group_by(Ethnicity) %>% 
+            summarize(highest = max(Data_Value))
+    paste("The highest value for stroke by ethnicity is", highestVar2)
+    }
+ })
   # Render About Us
   output$about_us <- renderText({
     
@@ -131,6 +83,6 @@ server <- shinyServer(function(input, output, session){
   # Render Sources
   output$sources <- renderText({
     
-})
+  })
   
 })

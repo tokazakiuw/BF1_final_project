@@ -6,7 +6,7 @@ library(leaflet)
 library(tidyverse)
 ## library(tidyr)
 ## library(stringr)
-library(plotly)
+
 
 ## Create Directory for Data Sets
 dir.create("shinyApp/data", showWarnings=FALSE)
