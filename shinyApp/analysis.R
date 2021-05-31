@@ -6,6 +6,7 @@ library(leaflet)
 library(tidyverse)
 ## library(tidyr)
 ## library(stringr)
+library(plotly)
 
 ## Create Directory for Data Sets
 dir.create("shinyApp/data", showWarnings=FALSE)
@@ -82,5 +83,21 @@ stroke_mortality_combined <- stroke_mortality_combined %>%
   rename(Gender = Stratification1,
          Ethnicity = Stratification2,
          State = LocationAbbr)
+#leaflet color palette
+hd_pal <- colorNumeric("Set1", hd_mortality_combined$Data_Value)
+stroke_pal <- colorNumeric("Set1", stroke_mortality_combined$Data_Value)
 
+# Plotly Code
+# Cleaning HD
+hd_plotly <- hd_mortality_combined %>% 
+  select(Year, State, LocationDesc, GeographicLevel, Data_Value, Gender, Ethnicity) %>% 
+  filter(GeographicLevel == "State") %>% 
+  mutate(hover = paste0(State, "\n", Data_Value, " Mortality Rate")) %>% 
+  mutate(Rate = Data_Value)
+# Cleaning Stroke
+stroke_plotly <- stroke_mortality_combined %>% 
+  select(Year, State, LocationDesc, GeographicLevel, Data_Value, Gender, Ethnicity) %>% 
+  filter(GeographicLevel == "State") %>% 
+  mutate(hover = paste0(State, "\n", Data_Value, " Mortality Rate")) %>% 
+  mutate(Rate = Data_Value)
 
