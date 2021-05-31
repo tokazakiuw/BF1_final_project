@@ -32,19 +32,29 @@ server <- shinyServer(function(input, output, session){
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
       filter(Gender == input$Gender) %>% 
+      filter(!is.na(Data_Value)) %>% 
+      filter(GeographicLevel != "State") %>% 
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~LocationDesc, radius = ~Data_Value*10)
+                 popup = ~LocationDesc, radius = ~Data_Value*20,
+                 color = ~hd_pal(Data_Value)) %>% 
+      addLegend(pal =  hd_pal, value = ~Data_Value)
+    
   } else {
     stroke_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
       filter(Gender == input$Gender) %>% 
+      filter(!is.na(Data_Value)) %>% 
+      filter(GeographicLevel != "State") %>% 
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~LocationDesc, radius = ~Data_Value*10)
+                 popup = ~LocationDesc, radius = ~Data_Value*20,
+                 color = ~stroke_pal(Data_Value)) %>% 
+      addLegend(pal = stroke_pal, value = ~Data_Value)
+      
   }
   })
   

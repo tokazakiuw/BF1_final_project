@@ -82,5 +82,8 @@ stroke_mortality_combined <- stroke_mortality_combined %>%
   rename(Gender = Stratification1,
          Ethnicity = Stratification2,
          State = LocationAbbr)
+#leaflet color palette
+hd_pal <- colorNumeric("Set1", hd_mortality_combined$Data_Value)
+stroke_pal <- colorNumeric("Set1", stroke_mortality_combined$Data_Value)
 
 
