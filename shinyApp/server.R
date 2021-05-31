@@ -22,8 +22,10 @@ server <- shinyServer(function(input, output, session){
 
   })
   
+  # Render Map
+  
   # Render Leaflet Map
-  output$map <- renderLeaflet({
+  output$lmap <- renderLeaflet({
 
   if(input$Disease == "Heart Disease") {
     hd_mortality_combined %>% 
@@ -47,8 +49,6 @@ server <- shinyServer(function(input, output, session){
                  popup = ~LocationDesc, radius = ~Data_Value*10)
   }
   })
-  
-  # Render Map
   
   # Render Table
     output$data <- renderDataTable({

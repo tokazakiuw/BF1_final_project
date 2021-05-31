@@ -30,6 +30,11 @@ ui <- fluidPage(
                    choices = c("Heart Disease", "Stroke"),
                    selected = "Heart Disease"),
       
+      # Select Gender
+      radioButtons(inputId = "Gender", label = "Select Gender",
+                   choices = unique(hd_mortality_combined$Gender),
+                   selected = "Overall"),
+      
       # Select State
       selectInput(inputId = "State", label = "Select State",
                   choices = unique(hd_mortality_combined$State), 
@@ -39,7 +44,9 @@ ui <- fluidPage(
     mainPanel(
       tabsetPanel(type = "tab",
                   tabPanel("Graph", plotOutput("plot")),
-                  tabPanel("Map", leafletOutput("map")),
+                  tabPanel("Map", 
+                           plotOutput("map"),
+                           leafletOutput("lmap")),
                   tabPanel("Disease Mortality Table", dataTableOutput("data")),
                   tabPanel("Summary", textOutput("summary")),
                   tabPanel("About Us", textOutput("about_us")),
