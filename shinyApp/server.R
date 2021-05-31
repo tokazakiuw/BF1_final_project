@@ -37,9 +37,10 @@ server <- shinyServer(function(input, output, session){
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~LocationDesc, radius = ~Data_Value*20,
+                 popup = ~paste(LocationDesc, input$Year, "-", input$Gender, "Heart Disease Mortality Rate of:", Data_Value, "(per 100,000 population)"),
+                 radius = ~Data_Value*20,
                  color = ~hd_pal(Data_Value)) %>% 
-      addLegend(pal =  hd_pal, value = ~Data_Value)
+      addLegend(title = "Mortality Rate (#/100000 Pop)", pal =  hd_pal, value = ~Data_Value)
     
   } else {
     stroke_mortality_combined %>% 
@@ -51,9 +52,10 @@ server <- shinyServer(function(input, output, session){
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~LocationDesc, radius = ~Data_Value*20,
+                 popup = ~paste(LocationDesc, input$Year, "-", input$Gender, "Stroke Mortality Rate of:", Data_Value, "(per 100,000 population)"),
+                 radius = ~Data_Value*20,
                  color = ~stroke_pal(Data_Value)) %>% 
-      addLegend(pal = stroke_pal, value = ~Data_Value)
+      addLegend(title = "Mortality Rate (#/100000 Pop)", pal = stroke_pal, value = ~Data_Value)
       
   }
   })
