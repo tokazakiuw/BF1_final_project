@@ -44,8 +44,10 @@ ui <- fluidPage(
     mainPanel(
       tabsetPanel(type = "tab",
                   tabPanel("Graph", plotOutput("plot")),
-                  tabPanel("Map", 
+                  tabPanel("Map",
+                           h4(strong(textOutput("label1"))),
                            plotlyOutput("map"),
+                           h4(strong(textOutput("label2"))),
                            leafletOutput("lmap")),
                   tabPanel("Disease Mortality Table", dataTableOutput("data")),
                   tabPanel("Summary", textOutput("summary")),

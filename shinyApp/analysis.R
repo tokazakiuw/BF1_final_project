@@ -92,9 +92,12 @@ stroke_pal <- colorNumeric("Set1", stroke_mortality_combined$Data_Value)
 hd_plotly <- hd_mortality_combined %>% 
   select(Year, State, LocationDesc, GeographicLevel, Data_Value, Gender, Ethnicity) %>% 
   filter(GeographicLevel == "State") %>% 
-  mutate(hover = paste0(State, "\n", Data_Value, " Mortality Rate"))
+  mutate(hover = paste0(State, "\n", Data_Value, " Mortality Rate")) %>% 
+  mutate(Rate = Data_Value)
 # Cleaning Stroke
 stroke_plotly <- stroke_mortality_combined %>% 
   select(Year, State, LocationDesc, GeographicLevel, Data_Value, Gender, Ethnicity) %>% 
   filter(GeographicLevel == "State") %>% 
-  mutate(hover = paste0(State, "\n", Data_Value, " Mortality Rate"))
+  mutate(hover = paste0(State, "\n", Data_Value, " Mortality Rate")) %>% 
+  mutate(Rate = Data_Value)
+
