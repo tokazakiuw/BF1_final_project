@@ -24,24 +24,25 @@ server <- shinyServer(function(input, output, session){
   
   # Render Map
   
-  output$map <- renderPlot({
+  output$map <- renderPlotly({
   if(input$Disease == "Heart Disease") {
-    hd_mortality_combined %>% 
-      filter(Year == input$Year) %>% 
-      filter(Gender == input$Gender) %>% 
-      filter(!is.na(Data_Value)) %>% 
-      filter(GeographicLevel == "State") %>% 
-    ggplot(aes(x = X_lon, y = Y_lat, group=State)) +
-      geom_polygon(aes(fill = Data_Value), color = "black")
+  hd_plotly %>% 
+    filter(Year == input$Year) %>% 
+    filter(Gender == input$Gender) %>% 
+    plot_geo(locationmode = 'USA-states') %>% 
+    add_trace(locations = ~State,
+      z = ~Data_Value, color = ~Data_Value,
+      text = ~hover, hoverinfo = 'text') %>% 
+    layout(geo = list(scope = 'usa'))
   } else {
-    stroke_mortality_combined %>% 
-      filter(Year == input$Year) %>% 
-      filter(Gender == input$Gender) %>% 
-      filter(!is.na(Data_Value)) %>% 
-      filter(GeographicLevel == "State") %>% 
-    ggplot(aes(x = X_lon, y = Y_lat, group=State)) +
-      geom_polygon(aes(fill = Data_Value), color = "black")
-
+  stroke_plotly %>% 
+    filter(Year == input$Year) %>% 
+    filter(Gender == input$Gender) %>% 
+    plot_geo(locationmode = 'USA-states') %>% 
+    add_trace(locations = ~State,
+      z = ~Data_Value, color = ~Data_Value,
+      text = ~hover, hoverinfo = 'text') %>% 
+    layout(geo = list(scope = 'usa'))
   }
 })
   
