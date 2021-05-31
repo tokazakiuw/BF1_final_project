@@ -31,8 +31,7 @@ server <- shinyServer(function(input, output, session){
     hd_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
-      filter(Gender == "Overall") %>% 
-      filter(Ethnicity == "Overall") %>% 
+      filter(Gender == input$Gender) %>% 
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
@@ -41,9 +40,8 @@ server <- shinyServer(function(input, output, session){
     stroke_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
-      filter(Gender == "Overall") %>% 
-      filter(Ethnicity == "Overall") %>% 
-      leaflet() %>% 
+      filter(Gender == input$Gender) %>% 
+    leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
                  popup = ~LocationDesc, radius = ~Data_Value*10)
