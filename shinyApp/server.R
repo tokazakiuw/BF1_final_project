@@ -16,7 +16,6 @@ source("analysis.R")
 # Define Server
 
 server <- shinyServer(function(input, output, session){
- 
   # Render Graph
   output$plot <- renderPlot({
 
@@ -25,6 +24,7 @@ server <- shinyServer(function(input, output, session){
   # Render Map
   output$map <- renderLeaflet({
 
+  if(input$Disease == "Heart Disease") {
     hd_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
@@ -32,19 +32,46 @@ server <- shinyServer(function(input, output, session){
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
                  popup = ~LocationDesc)
+  } else {
+    stroke_mortality_combined %>% 
+      filter(Year == input$Year) %>% 
+      filter(State == input$State) %>% 
+      leaflet() %>% 
+      addTiles() %>% 
+      addCircles(lng = ~X_lon, lat = ~Y_lat,
+                 popup = ~LocationDesc)
+  }
   })
   
   # Render Table
     output$data <- renderDataTable({
-  hd_mortality_combined
-    })
-   
-    output$data2 <- renderDataTable({
-    stroke_mortality_combined
-    })
+      if(input$Disease == "Heart Disease") {
+        hd_mortality_combined
+      } else {
+        stroke_mortality_combined
+      }
+  })
       
   # Render Summary
   output$summary <- renderText({
+    #What Ethnicity has the highest rate of mortality from heart disease
+    if(input$Disease == "Heart Disease"){
+     highestVar <-  hd_mortality_combined %>% 
+        select(Ethnicity, Data_Value,Year,State) %>% 
+        filter(Data_Value == max(Data_Value), 
+               Year == input$Year, 
+               State == input$State)
+     paste("The highest value for  heart disease by ethnicity is", highestVar)
+    }
+    else{stroke_mortality_combined %>% 
+      highestVar2 <- stroke_mortality_combined %>% 
+        select(Ethnicity, Data_Value, Year, State) %>% 
+      filter(Data_Value == max(Data_Value), 
+             Year == input$Year, 
+             State == input$State)
+    paste("The highest value for stroke by ethnicity is", highestVar2)
+    
+  }
   })
   
   # Render About Us
@@ -56,6 +83,6 @@ server <- shinyServer(function(input, output, session){
   # Render Sources
   output$sources <- renderText({
     
-  })
+})
   
 })
