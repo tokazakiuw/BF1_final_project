@@ -24,6 +24,27 @@ server <- shinyServer(function(input, output, session){
   
   # Render Map
   
+  output$map <- renderPlot({
+  if(input$Disease == "Heart Disease") {
+    hd_mortality_combined %>% 
+      filter(Year == input$Year) %>% 
+      filter(Gender == input$Gender) %>% 
+      filter(!is.na(Data_Value)) %>% 
+      filter(GeographicLevel == "State") %>% 
+    ggplot(aes(x = X_lon, y = Y_lat, group=State)) +
+      geom_polygon(aes(fill = Data_Value), color = "black")
+  } else {
+    stroke_mortality_combined %>% 
+      filter(Year == input$Year) %>% 
+      filter(Gender == input$Gender) %>% 
+      filter(!is.na(Data_Value)) %>% 
+      filter(GeographicLevel == "State") %>% 
+    ggplot(aes(x = X_lon, y = Y_lat, group=State)) +
+      geom_polygon(aes(fill = Data_Value), color = "black")
+
+  }
+})
+  
   # Render Leaflet Map
   output$lmap <- renderLeaflet({
 
@@ -58,7 +79,7 @@ server <- shinyServer(function(input, output, session){
       addLegend(title = "Mortality Rate (#/100000 Pop)", pal = stroke_pal, value = ~Data_Value)
       
   }
-  })
+})
   
   # Render Table
     output$data <- renderDataTable({

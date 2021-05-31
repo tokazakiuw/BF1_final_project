@@ -6,6 +6,7 @@ library(leaflet)
 library(tidyverse)
 ## library(tidyr)
 ## library(stringr)
+library(sf)
 
 ## Create Directory for Data Sets
 dir.create("shinyApp/data", showWarnings=FALSE)
@@ -86,4 +87,16 @@ stroke_mortality_combined <- stroke_mortality_combined %>%
 hd_pal <- colorNumeric("Set1", hd_mortality_combined$Data_Value)
 stroke_pal <- colorNumeric("Set1", stroke_mortality_combined$Data_Value)
 
+## US State Shapes
+shapeUS <- st_read(dsn = "data/cb_2018_us_state_5m/cb_2018_us_state_5m.shp")
+colnames(shapeUS)[colnames(shapeUS) == "GEOID"] <- "LocationID"
+shapeUS$LocationID <- as.numeric(shapeUS$LocationID)
+str(shapeUS)
+## Merge Shape to DF
+hd_shapes <- left_join(hd_mortality_combined, shapeUS, by = "LocationID")
+hd_shapes <- hd_shapes %>% 
+  filter(GeographicLevel == "State")
+stroke_shapes <-left_join(stroke_mortality_combined, shapeUS, by = "LocationID")
 
+ggplot(data = hd_shapes, aes(geometry = geometry)) +
+  geom_sf(aes(fill = Data_Value))
