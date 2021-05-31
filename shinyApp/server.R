@@ -22,27 +22,33 @@ server <- shinyServer(function(input, output, session){
 
   })
   
-  # Render Map
+  # Render Leaflet Map
   output$map <- renderLeaflet({
 
   if(input$Disease == "Heart Disease") {
     hd_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
+      filter(Gender == "Overall") %>% 
+      filter(Ethnicity == "Overall") %>% 
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~LocationDesc)
+                 popup = ~LocationDesc, radius = ~Data_Value*10)
   } else {
     stroke_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
+      filter(Gender == "Overall") %>% 
+      filter(Ethnicity == "Overall") %>% 
       leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~LocationDesc)
+                 popup = ~LocationDesc, radius = ~Data_Value*10)
   }
   })
+  
+  # Render Map
   
   # Render Table
     output$data <- renderDataTable({
