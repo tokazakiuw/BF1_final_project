@@ -96,9 +96,17 @@ server <- shinyServer(function(input, output, session){
     output$data <- renderDataTable({
       
       if(input$Disease == "Heart Disease") {
-        hd_mortality_combined
+        hd_mortality_combined %>% 
+          filter(Year == input$Year) %>% 
+          filter(State == input$State) %>% 
+          filter(Gender == input$Gender) %>% 
+          select(Year, State, LocationDesc, GeographicLevel, Topic, Data_Value, Data_Value_Unit, Data_Value_Type, Gender, Ethnicity)
       } else {
-        stroke_mortality_combined
+        stroke_mortality_combined %>% 
+          filter(Year == input$Year) %>% 
+          filter(State == input$State) %>% 
+          filter(Gender == input$Gender) %>%
+          select(Year, State, LocationDesc, GeographicLevel, Topic, Data_Value, Data_Value_Unit, Data_Value_Type, Gender, Ethnicity)
       }
   })
       
