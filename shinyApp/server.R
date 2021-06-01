@@ -63,9 +63,10 @@ server <- shinyServer(function(input, output, session){
         filter(Gender == input$Gender) %>%
         group_by(Ethnicity) %>% 
         summarize(highest = max(Data_Value)) %>% 
-     mutate(combined = paste(Ethnicity,highest)) 
-     paste("The highest value for  heart disease by ethnicity is",highestVar$combined)
-         
+     mutate(Ethnicity= paste(Ethnicity)) %>% 
+     mutate(highest= paste(highest))
+  paste("The highest value for heart disease for",highestVar$Ethnicity, "is", highestVar$highest, ". ")
+
   }
     else{ 
     highestVar2 <- stroke_mortality_combined %>% 
@@ -75,8 +76,11 @@ server <- shinyServer(function(input, output, session){
             filter(Gender == input$Gender) %>% 
             group_by(Ethnicity) %>% 
             summarize(highest = max(Data_Value)) %>% 
-      mutate(combined = paste(Ethnicity, highest)) 
-    paste("The highest value for stroke by ethnicity is",highestVar2$combined)
+      mutate(Ethnicity= paste(Ethnicity)) %>% 
+      mutate(highest= paste(highest))
+ paste("The highest value for stroke for",highestVar$Ethnicity, "is", highestVar$highest,". " )
+
+    
     }
  })
   # Render About Us
