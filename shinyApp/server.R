@@ -56,22 +56,27 @@ server <- shinyServer(function(input, output, session){
   output$summary <- renderText({
     #What Ethnicity has the highest rate of mortality from heart disease
     if(input$Disease == "Heart Disease"){ 
-      highestVar <- hd_mortality_combined %>%
+   highestVar <- hd_mortality_combined %>%
+     select(Year, State, Gender,Ethnicity, Data_Value) %>%
         filter(Year == input$Year) %>% 
         filter(State == input$State) %>%
         filter(Gender == input$Gender) %>%
         group_by(Ethnicity) %>% 
-        summarize(highest = max(Data_Value))
-     paste("The highest value for  heart disease by ethnicity is", highestVar)
+        summarize(highest = max(Data_Value)) %>% 
+     mutate(combined = paste(Ethnicity,highest)) 
+     paste("The highest value for  heart disease by ethnicity is",highestVar$combined)
+         
   }
     else{ 
-      highestVar2 <- stroke_mortality_combined %>% 
+    highestVar2 <- stroke_mortality_combined %>% 
+      select(Year, State, Gender,Ethnicity, Data_Value) %>%
             filter(Year == input$Year) %>% 
-            filter(State == input$State) %>%
+            filter(State == input$State) %>% 
             filter(Gender == input$Gender) %>% 
             group_by(Ethnicity) %>% 
-            summarize(highest = max(Data_Value))
-    paste("The highest value for stroke by ethnicity is", highestVar2)
+            summarize(highest = max(Data_Value)) %>% 
+      mutate(combined = paste(Ethnicity, highest)) 
+    paste("The highest value for stroke by ethnicity is",highestVar2$combined)
     }
  })
   # Render About Us
@@ -84,5 +89,5 @@ server <- shinyServer(function(input, output, session){
   output$sources <- renderText({
     
   })
-  
+
 })
