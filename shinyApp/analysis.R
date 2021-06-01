@@ -6,7 +6,7 @@ library(leaflet)
 library(tidyverse)
 ## library(tidyr)
 ## library(stringr)
-library(plotly)
+
 
 ## Create Directory for Data Sets
 dir.create("shinyApp/data", showWarnings=FALSE)
@@ -100,4 +100,18 @@ stroke_plotly <- stroke_mortality_combined %>%
   filter(GeographicLevel == "State") %>% 
   mutate(hover = paste0(State, "\n", Data_Value, " Mortality Rate")) %>% 
   mutate(Rate = Data_Value)
+
+highestVar <- hd_mortality_combined %>%
+  select(Year, State, Gender,Ethnicity, Data_Value) %>%
+  filter(Year == 2014) %>% 
+  filter(State == "WA") %>%
+  filter(Gender == "Female") %>%
+  group_by(Ethnicity) %>% 
+  summarize(highest = max(Data_Value)) %>% 
+  mutate(Ethnicity= paste(Ethnicity)) %>% 
+  mutate(highest= paste(highest))
+  paste("The highest value for heart disease for",highestVar$Ethnicity, "is", highestVar$highest)
+
+
+
 
