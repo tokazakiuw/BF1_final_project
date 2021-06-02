@@ -95,18 +95,30 @@ server <- shinyServer(function(input, output, session){
     hd_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
+      filter(Gender == input$Gender) %>% 
+      filter(!is.na(Data_Value)) %>% 
+      filter(GeographicLevel != "State") %>% 
     leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~LocationDesc)
+                 popup = ~paste(LocationDesc, input$Year, "-", input$Gender, "Heart Disease Mortality Rate of:", Data_Value, "(per 100,000 population)"),
+                 radius = ~Data_Value*20,
+                 color = ~hd_pal(Data_Value)) %>% 
+      addLegend(title = "Mortality Rate (#/100000 Pop)", pal =  hd_pal, value = ~Data_Value)
   } else {
     stroke_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
+      filter(Gender == input$Gender) %>% 
+      filter(!is.na(Data_Value)) %>% 
+      filter(GeographicLevel != "State") %>% 
       leaflet() %>% 
       addTiles() %>% 
       addCircles(lng = ~X_lon, lat = ~Y_lat,
-                 popup = ~LocationDesc)
+                 popup = ~paste(LocationDesc, input$Year, "-", input$Gender, "Stroke Mortality Rate of:", Data_Value, "(per 100,000 population)"),
+                 radius = ~Data_Value*20,
+                 color = ~stroke_pal(Data_Value)) %>% 
+      addLegend(title = "Mortality Rate (#/100000 Pop)", pal = stroke_pal, value = ~Data_Value)
   }
   })
   
