@@ -100,7 +100,7 @@ stroke_plotly <- stroke_mortality_combined %>%
   filter(GeographicLevel == "State") %>% 
   mutate(hover = paste0(State, "\n", Data_Value, " Mortality Rate")) %>% 
   mutate(Rate = Data_Value)
-
+#check if summary works 
 highestVar <- hd_mortality_combined %>%
   select(Year, State, Gender,Ethnicity, Data_Value) %>%
   filter(Year == 2014) %>% 
