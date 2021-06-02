@@ -50,7 +50,7 @@ ui <- fluidPage(
                            plotOutput("plot1")),
                   tabPanel("Map",
                            h4(strong(textOutput("label1"))),
-                         leafletOutput("map"),
+                         plotlyOutput("map"),
                            h4(strong(textOutput("label2"))),
                            leafletOutput("lmap")),
                   tabPanel("Disease Mortality Table", dataTableOutput("data")),
