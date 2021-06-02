@@ -247,7 +247,11 @@ server <- shinyServer(function(input, output){
   
   # Render Map Description
   output$mapdesc <- renderText({
-    
+    paste0("These maps represent the ", input$Gender, " ",input$Disease, " Mortality Rates for ", input$State, " State in Year ", input$Year,
+           ". Gathered from averaged CDC (Centers for Disease Control and Prevention) Cardiovascular Disease Mortality data among US adults (age 35+), 
+           we can plot instances by certain variables to gain insights. By using geospatial location for analysis, specifically, we can depict the level/severity of mortality rates 
+           by using a color scale and filling geospatial values according to this scale. In the upper plot we can see the spread of mortality rates among US states in a given year, 
+           and in the lower plot we see how these mortality rates compare against specific counties in a selected state.")
     
   })
   
