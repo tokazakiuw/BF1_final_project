@@ -17,7 +17,7 @@ source("analysis.R")
 
 # Define Server
 
-server <- shinyServer(function(input, output, session){
+server <- shinyServer(function(input, output){
  
 # Render Overall County Mortality Graph
   output$plot <- renderPlot({
