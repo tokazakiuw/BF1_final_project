@@ -45,6 +45,7 @@ ui <- fluidPage(
     ),
     mainPanel(
       tabsetPanel(type = "tab",
+                  tabPanel("Overview", textOutput("overview")),
                   tabPanel("Graph", 
                            plotOutput("plot"),
                            plotOutput("plot1")),
@@ -54,9 +55,8 @@ ui <- fluidPage(
                            h4(strong(textOutput("label2"))),
                            leafletOutput("lmap")),
                   tabPanel("Disease Mortality Table", dataTableOutput("data")),
-                  tabPanel("Summary", textOutput("summary")),
-                  tabPanel("About Us", textOutput("about_us")),
-                  tabPanel("Sources", textOutput("sources"))
+                  tabPanel("Analysis", textOutput("summary")),
+                  tabPanel("About Us", textOutput("about_us"))
       )
     )
   )
