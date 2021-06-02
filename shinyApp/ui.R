@@ -21,7 +21,6 @@ ui <- fluidPage(
   titlePanel("Cardiovascular Diseases in the U.S"),
   sidebarLayout(
     sidebarPanel(
-      
       # Select Year Range
       sliderInput(inputId = "Year", label = "Select Year Range",
                   min = 2014, max = 2018,

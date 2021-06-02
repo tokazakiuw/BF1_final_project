@@ -217,8 +217,16 @@ server <- shinyServer(function(input, output){
 
   # Render Conclusion
   output$conclusion <- renderText({
-    
-    
+    paste("In the graph, “Stroke Mortality Rates Grouped by Ethnicity in WA”, 
+    it appears that Hispanic females have a lower rate of mortality from a stroke than
+    Hispanic males from 2014 to 2018, except in 2016. In 2016, the mortality rate for Hispanic
+    males and females was the same (rate:53). From the same graph, you can see that Black, American 
+    Indian, and Alaskan Native are the top three ethnicities in Washington with the highest mortality
+    rate for both stroke and heart disease.  The data quality wasn’t completely perfect. It lacked representation
+    for minorities. Sometimes the data wouldn’t return data for minorities, it would just say “NA.”  Which results 
+    in biased results and also harming minorities by not giving the proper information. I think adding income level and
+    exercise level to the data set would be interesting to see how these parts play a role in the mortality rate of cardiovascular
+    diseases in the U.S.")
   })  
   
   # Render About Us
