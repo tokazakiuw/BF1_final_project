@@ -33,7 +33,7 @@ server <- shinyServer(function(input, output, session){
   ggplot(aes(x=reorder(LocationDesc, Data_Value), y=Data_Value, fill=LocationDesc)) +
       geom_col() +
       theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
-      labs(title = paste0(input$State, " Counties ", "(", input$Year, ") ", "with Highest ", input$Gender, " Mortality Rates by Overall Ethnicity"),
+      labs(title = paste0(input$State, " Counties ", "(", input$Year, ") ", "with Highest ", input$Gender, " ", input$Disease, " Mortality Rates by Overall Ethnicity"),
            fill = paste(input$State, "Counties Labels"),
            y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
            x = paste("Top 15", input$State, "Counties"))
@@ -50,7 +50,7 @@ server <- shinyServer(function(input, output, session){
       ggplot(aes(x=reorder(LocationDesc, Data_Value), y=Data_Value, fill=LocationDesc)) +
       geom_col() +
       theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
-      labs(title = paste0(input$State, " Counties ", "(", input$Year, ") ", "with Highest ", input$Gender, " Mortality Rates by Overall Ethnicity"),
+      labs(title = paste0(input$State, " Counties ", "(", input$Year, ") ", "with Highest ", input$Gender, " ", input$Disease, " Mortality Rates by Overall Ethnicity"),
            fill = paste(input$State, "Counties Labels"),
            y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
            x = paste("Top 15", input$State, "Counties"))
