@@ -111,7 +111,3 @@ highestVar <- hd_mortality_combined %>%
   mutate(Ethnicity= paste(Ethnicity)) %>% 
   mutate(highest= paste(highest))
   paste("The highest value for heart disease for",highestVar$Ethnicity, "is", highestVar$highest)
-
-
-
-

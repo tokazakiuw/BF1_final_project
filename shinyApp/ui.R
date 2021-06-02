@@ -7,6 +7,8 @@ library(tidyverse)
 ## library(tidyr)
 ## library(stringr)
 library(DT)
+library(plotly)
+
 # Load Data
 cat("--working dir", getwd(), "\n")
 
@@ -43,10 +45,12 @@ ui <- fluidPage(
     ),
     mainPanel(
       tabsetPanel(type = "tab",
-                  tabPanel("Graph", plotOutput("plot")),
+                  tabPanel("Graph", 
+                           plotOutput("plot"),
+                           plotOutput("plot1")),
                   tabPanel("Map",
                            h4(strong(textOutput("label1"))),
-                         leafletOutput("map"),
+                         plotlyOutput("map"),
                            h4(strong(textOutput("label2"))),
                            leafletOutput("lmap")),
                   tabPanel("Disease Mortality Table", dataTableOutput("data")),
