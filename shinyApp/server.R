@@ -238,7 +238,10 @@ server <- shinyServer(function(input, output){
   # Plot & Table Descriptions
   # Render Graph Description
   output$graphdesc <- renderText({
-    
+    paste0("These graphs represent the ", input$Gender, " ",input$Disease, " Mortality Rates for ", input$State, " State in Year ", input$Year,
+           ". Gathered from averaged CDC (Centers for Disease Control and Prevention) Cardiovascular Disease Mortality data among US adults (age 35+), 
+           we can plot instances by certain variables to gain insights. In the upper plot we can see a state's counties with highest mortality rates, 
+           and in the lower plot we see how these mortality rates compare to underlying factors such as ethnicity.")
     
   })
   
