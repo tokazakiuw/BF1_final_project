@@ -27,6 +27,7 @@ server <- shinyServer(function(input, output, session){
       filter(State == input$State) %>% 
       filter(Gender == input$Gender) %>% 
       filter(Ethnicity == "Overall") %>% 
+      filter(!is.na(Data_Value)) %>% 
       group_by(LocationDesc) %>% 
       arrange(desc(Data_Value)) %>% 
       ungroup %>% 
@@ -44,6 +45,7 @@ server <- shinyServer(function(input, output, session){
       filter(State == input$State) %>% 
       filter(Gender == input$Gender) %>% 
       filter(Ethnicity == "Overall") %>% 
+      filter(!is.na(Data_Value)) %>% 
       group_by(LocationDesc) %>% 
       arrange(desc(Data_Value)) %>% 
       ungroup %>% 
@@ -64,7 +66,9 @@ server <- shinyServer(function(input, output, session){
       hd_mortality_combined %>% 
         filter(Year == input$Year) %>% 
         filter(State == input$State) %>% 
-        filter(Gender == input$Gender) %>% 
+        filter(Gender == input$Gender) %>%
+        filter(GeographicLevel == "State") %>% 
+        filter(!is.na(Data_Value)) %>% 
         group_by(Ethnicity) %>% 
         arrange(desc(Data_Value)) %>% 
         ggplot(aes(x=reorder(Ethnicity, Data_Value), y=Data_Value, fill=Ethnicity)) +
@@ -79,6 +83,8 @@ server <- shinyServer(function(input, output, session){
         filter(Year == input$Year) %>% 
         filter(State == input$State) %>% 
         filter(Gender == input$Gender) %>% 
+        filter(GeographicLevel == "State") %>% 
+        filter(!is.na(Data_Value)) %>% 
         group_by(Ethnicity) %>% 
         arrange(desc(Data_Value)) %>% 
         ggplot(aes(x=reorder(Ethnicity, Data_Value), y=Data_Value, fill=Ethnicity)) +
@@ -165,12 +171,14 @@ server <- shinyServer(function(input, output, session){
           filter(Year == input$Year) %>% 
           filter(State == input$State) %>% 
           filter(Gender == input$Gender) %>% 
+          filter(!is.na(Data_Value)) %>% 
           select(Year, State, LocationDesc, GeographicLevel, Topic, Data_Value, Data_Value_Unit, Data_Value_Type, Gender, Ethnicity)
       } else {
         stroke_mortality_combined %>% 
           filter(Year == input$Year) %>% 
           filter(State == input$State) %>% 
           filter(Gender == input$Gender) %>%
+          filter(!is.na(Data_Value)) %>% 
           select(Year, State, LocationDesc, GeographicLevel, Topic, Data_Value, Data_Value_Unit, Data_Value_Type, Gender, Ethnicity)
       }
   })
@@ -184,6 +192,7 @@ server <- shinyServer(function(input, output, session){
         filter(Year == input$Year) %>% 
         filter(State == input$State) %>%
         filter(Gender == input$Gender) %>%
+        filter(!is.na(Data_Value)) %>% 
         group_by(Ethnicity) %>% 
         summarize(highest = max(Data_Value)) %>% 
      mutate(Ethnicity= paste(Ethnicity)) %>% 
@@ -197,6 +206,7 @@ server <- shinyServer(function(input, output, session){
             filter(Year == input$Year) %>% 
             filter(State == input$State) %>% 
             filter(Gender == input$Gender) %>% 
+            filter(!is.na(Data_Value)) %>% 
             group_by(Ethnicity) %>% 
             summarize(highest = max(Data_Value)) %>% 
       mutate(Ethnicity= paste(Ethnicity)) %>% 
