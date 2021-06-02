@@ -18,7 +18,8 @@ source("analysis.R")
 # Define Server
 
 server <- shinyServer(function(input, output, session){
-  # Render Overall County Mortality Graph
+ 
+# Render Overall County Mortality Graph
   output$plot <- renderPlot({
   if(input$Disease == "Heart Disease") {
     hd_mortality_combined %>% 
@@ -55,7 +56,39 @@ server <- shinyServer(function(input, output, session){
            y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
            x = paste("Top 15", input$State, "Counties"))
   }
-    
+})
+  
+# Render Ethnicity Mortality Graph
+  output$plot1 <- renderPlot({
+    if(input$Disease == "Heart Disease") {
+      hd_mortality_combined %>% 
+        filter(Year == input$Year) %>% 
+        filter(State == input$State) %>% 
+        filter(Gender == input$Gender) %>% 
+        group_by(Ethnicity) %>% 
+        arrange(desc(Data_Value)) %>% 
+        ggplot(aes(x=reorder(Ethnicity, Data_Value), y=Data_Value, fill=Ethnicity)) +
+        geom_col() +
+        theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
+        labs(title = paste0(input$State, " Ethnicity ", "(", input$Year, ") ", "with Highest ", input$Gender, " ", input$Disease, " Mortality Rates"),
+             fill = paste(input$State, "Ethnicity Labels"),
+             y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
+             x = paste(input$State, "Ethnicity"))
+    } else {
+      stroke_mortality_combined %>% 
+        filter(Year == input$Year) %>% 
+        filter(State == input$State) %>% 
+        filter(Gender == input$Gender) %>% 
+        group_by(Ethnicity) %>% 
+        arrange(desc(Data_Value)) %>% 
+        ggplot(aes(x=reorder(Ethnicity, Data_Value), y=Data_Value, fill=Ethnicity)) +
+        geom_col() +
+        theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
+        labs(title = paste0(input$State, " Ethnicity ", "(", input$Year, ") ", "with Highest ", input$Gender, " ", input$Disease, " Mortality Rates"),
+             fill = paste(input$State, "Ethnicity Labels"),
+             y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
+             x = paste(input$State, "Ethnicity"))
+    }
   })
   
   # Render Map Labels
