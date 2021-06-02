@@ -47,16 +47,18 @@ ui <- fluidPage(
                   tabPanel("Overview", textOutput("overview")),
                   tabPanel("Graph", 
                            plotOutput("plot"),
-                           plotOutput("plot1")),
+                           plotOutput("plot1"),
+                           textOutput("graphdesc")),
                   tabPanel("Map",
                            h4(strong(textOutput("label1"))),
-                         plotlyOutput("map"),
+                           plotlyOutput("map"),
                            h4(strong(textOutput("label2"))),
-                           leafletOutput("lmap")),
+                           leafletOutput("lmap"),
+                           textOutput("mapdesc")),
                   tabPanel("Disease Mortality Table",
                            dataTableOutput("data"),
-                            textOutput("summary")),
-
+                            textOutput("summary"),
+                            textOutput("tabledesc")),
                   tabPanel("Insights", textOutput("conclusion")),
                   tabPanel("About Us", textOutput("about_us"))
       )

@@ -235,4 +235,23 @@ server <- shinyServer(function(input, output){
    
   })
 
+  # Plot & Table Descriptions
+  # Render Graph Description
+  output$graphdesc <- renderText({
+    
+    
+  })
+  
+  # Render Map Description
+  output$mapdesc <- renderText({
+    
+    
+  })
+  
+  # Render Table Description
+  output$tabledesc <- renderText({
+    
+    
+  })
+  
 })
