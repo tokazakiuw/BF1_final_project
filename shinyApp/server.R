@@ -216,15 +216,17 @@ server <- shinyServer(function(input, output){
     
     }
  })
+
+  # Render Conclusion
+  output$conclusion <- renderText({
+    
+    
+  })  
+  
   # Render About Us
   output$about_us <- renderText({
     
    
-  })
-  
-  # Render Sources
-  output$sources <- renderText({
-    
   })
 
 })
