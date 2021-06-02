@@ -38,7 +38,7 @@ server <- shinyServer(function(input, output, session){
       labs(title = paste0(input$State, " Counties ", "(", input$Year, ") ", "with Highest ", input$Gender, " ", input$Disease, " Mortality Rates by Overall Ethnicity"),
            fill = paste(input$State, "Counties Labels"),
            y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
-           x = paste("Top 15", input$State, "Counties"))
+           x = paste("Top", input$State, "Counties"))
   } else {
     stroke_mortality_combined %>% 
       filter(Year == input$Year) %>% 
@@ -56,7 +56,7 @@ server <- shinyServer(function(input, output, session){
       labs(title = paste0(input$State, " Counties ", "(", input$Year, ") ", "with Highest ", input$Gender, " ", input$Disease, " Mortality Rates by Overall Ethnicity"),
            fill = paste(input$State, "Counties Labels"),
            y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
-           x = paste("Top 15", input$State, "Counties"))
+           x = paste("Top", input$State, "Counties"))
   }
 })
   
