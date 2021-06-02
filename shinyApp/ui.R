@@ -55,7 +55,7 @@ ui <- fluidPage(
                            h4(strong(textOutput("label2"))),
                            leafletOutput("lmap")),
                   tabPanel("Disease Mortality Table", dataTableOutput("data")),
-                  tabPanel("Analysis", textOutput("summary")),
+                  tabPanel("Insights", textOutput("summary")),
                   tabPanel("About Us", textOutput("about_us"))
       )
     )
