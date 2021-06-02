@@ -16,9 +16,41 @@ source("analysis.R")
 # Define Server
 
 server <- shinyServer(function(input, output, session){
-  # Render Graph
+  # Render Overall County Mortality Graph
   output$plot <- renderPlot({
+  if(input$Disease == "Heart Disease") {
+  hd_mortality_combined %>% 
+      filter(Year == input$Year) %>% 
+      filter(State == input$State) %>% 
+      filter(Gender == input$Gender) %>% 
+      filter(Ethnicity == "Overall") %>% 
+      group_by(LocationDesc) %>% 
+      arrange(desc(Data_Value)) %>% 
+      slice_head(n = 10) %>% 
+  ggplot(aes(x=reorder(LocationDesc, Data_Value), y=Data_Value, fill=LocationDesc)) +
+      geom_col() +
+      theme(axis.text.x = element_text(angle=90, hjust = 1, siz = 6)) +
+      labs(title = paste("Top 10 Counties with Highest Overall Mortality Rates in", input$State, input$Year),
+           y = paste(input$Disease, "Morality Rates per 100000 Population"),
+           x = "Counties")
 
+  } else {
+    stroke_mortality_combined %>% 
+      filter(Year == input$Year) %>% 
+      filter(State == input$State) %>% 
+      filter(Gender == input$Gender) %>% 
+      filter(Ethnicity == "Overall") %>% 
+      group_by(LocationDesc) %>% 
+      arrange(desc(Data_Value)) %>% 
+      slice_head(n = 10) %>% 
+      ggplot(aes(x=reorder(LocationDesc, Data_Value), y=Data_Value, fill=LocationDesc)) +
+      geom_col() +
+      theme(axis.text.x = element_text(angle=90, hjust = 1, siz = 6)) +
+      labs(title = paste("Top 10 Counties with Highest Overall Mortality Rates in", input$State, input$Year),
+           y = paste(input$Disease, "Morality Rates per 100000 Population"),
+           x = "Counties")
+  }
+    
   })
   
   # Render Map
