@@ -212,19 +212,19 @@ server <- shinyServer(function(input, output){
       mutate(Ethnicity= paste(Ethnicity)) %>% 
       mutate(highest= paste(highest))
  paste("The highest value for stroke for",highestVar$Ethnicity, "is", highestVar$highest,". " )
-
-    
     }
  })
+
+  # Render Conclusion
+  output$conclusion <- renderText({
+    
+    
+  })  
+  
   # Render About Us
   output$about_us <- renderText({
     
    
-  })
-  
-  # Render Sources
-  output$sources <- renderText({
-    
   })
 
 })
