@@ -74,10 +74,10 @@ server <- shinyServer(function(input, output, session){
         ggplot(aes(x=reorder(Ethnicity, Data_Value), y=Data_Value, fill=Ethnicity)) +
         geom_col() +
         theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
-        labs(title = paste0(input$State, " Ethnicity ", "(", input$Year, ") ", "with Highest ", input$Gender, " ", input$Disease, " Mortality Rates"),
-             fill = paste(input$State, "Ethnicity Labels"),
+        labs(title = paste0(input$Gender, " ", input$Disease, " Mortality Rates Grouped by Ethnicity in ", input$State, " (", input$Year, ")"),
+             fill = paste("Ethnicity Labels"),
              y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
-             x = paste(input$State, "Ethnicity"))
+             x = paste("Ethnicities"))
     } else {
       stroke_mortality_combined %>% 
         filter(Year == input$Year) %>% 
@@ -90,10 +90,10 @@ server <- shinyServer(function(input, output, session){
         ggplot(aes(x=reorder(Ethnicity, Data_Value), y=Data_Value, fill=Ethnicity)) +
         geom_col() +
         theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
-        labs(title = paste0(input$State, " Ethnicity ", "(", input$Year, ") ", "with Highest ", input$Gender, " ", input$Disease, " Mortality Rates"),
-             fill = paste(input$State, "Ethnicity Labels"),
+        labs(title = paste0(input$Gender, " ", input$Disease, " Mortality Rates Grouped by Ethnicity in ", input$State, " (", input$Year, ")"),
+             fill = paste("Ethnicity Labels"),
              y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
-             x = paste(input$State, "Ethnicity"))
+             x = paste("Ethnicities"))
     }
   })
   
