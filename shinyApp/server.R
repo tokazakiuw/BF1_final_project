@@ -21,21 +21,22 @@ server <- shinyServer(function(input, output, session){
   # Render Overall County Mortality Graph
   output$plot <- renderPlot({
   if(input$Disease == "Heart Disease") {
-  hd_mortality_combined %>% 
+    hd_mortality_combined %>% 
       filter(Year == input$Year) %>% 
       filter(State == input$State) %>% 
       filter(Gender == input$Gender) %>% 
       filter(Ethnicity == "Overall") %>% 
       group_by(LocationDesc) %>% 
       arrange(desc(Data_Value)) %>% 
-      slice_head(n = 10) %>% 
+      ungroup %>% 
+      top_n(15, Data_Value) %>% 
   ggplot(aes(x=reorder(LocationDesc, Data_Value), y=Data_Value, fill=LocationDesc)) +
       geom_col() +
-      theme(axis.text.x = element_text(angle=90, hjust = 1, siz = 6)) +
-      labs(title = paste("Top 10 Counties with Highest Overall Mortality Rates in", input$State, input$Year),
-           y = paste(input$Disease, "Morality Rates per 100000 Population"),
-           x = "Counties")
-
+      theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
+      labs(title = paste0("Top 15 Counties with Highest Overall ", input$Disease, " Mortality Rates in ", input$State, " (",input$Year, ")"),
+           fill = paste(input$State, "Counties Labels"),
+           y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
+           x = paste("Top 15", input$State, "Counties"))
   } else {
     stroke_mortality_combined %>% 
       filter(Year == input$Year) %>% 
@@ -44,13 +45,15 @@ server <- shinyServer(function(input, output, session){
       filter(Ethnicity == "Overall") %>% 
       group_by(LocationDesc) %>% 
       arrange(desc(Data_Value)) %>% 
-      slice_head(n = 10) %>% 
+      ungroup %>% 
+      top_n(15, Data_Value) %>% 
       ggplot(aes(x=reorder(LocationDesc, Data_Value), y=Data_Value, fill=LocationDesc)) +
       geom_col() +
-      theme(axis.text.x = element_text(angle=90, hjust = 1, siz = 6)) +
-      labs(title = paste("Top 10 Counties with Highest Overall Mortality Rates in", input$State, input$Year),
-           y = paste(input$Disease, "Morality Rates per 100000 Population"),
-           x = "Counties")
+      theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
+      labs(title = paste0("Top 15 Counties with Highest Overall ", input$Disease, " Mortality Rates in ", input$State, " (",input$Year, ")"),
+           fill = paste(input$State, "Counties Labels"),
+           y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
+           x = paste("Top 15", input$State, "Counties"))
   }
     
   })
