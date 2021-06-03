@@ -39,9 +39,10 @@ ui <- fluidPage(
       # Select State
       selectInput(inputId = "State", label = "Select State",
                   choices = unique(hd_mortality_combined$State), 
-                  selected = "WA"),
+                  selected = "WA")
       
     ),
+    
     mainPanel(
       tabsetPanel(type = "tab",
                   tabPanel("Overview",titlePanel("Overview"), 
@@ -53,7 +54,7 @@ ui <- fluidPage(
                            titlePanel("Graph Visualizations"),
                            textOutput("graphdesc"), br(),
                            plotOutput("plot"), br(),
-                           plotOutput("plot1"),
+                           plotOutput("plot1")
                            ),
                   tabPanel("Map",
                            titlePanel("Geographic Visualizations"),
@@ -67,18 +68,23 @@ ui <- fluidPage(
                            titlePanel("Table Visualizations"),
                            textOutput("tabledesc"), br(),
                            dataTableOutput("data"), br(),
-                           textOutput("summary"),
+                           textOutput("summary")
                             ),
                   tabPanel("Insights", titlePanel("Conclusions"),textOutput("conclusion")),
-                  navbarMenu("About Us",
+                  navbarMenu( "About Us",
                              tabPanel("Pablo Aguirre",
                                       titlePanel("Pablo Aguirre"),
                                       textOutput("pablo"),
                                       img(src='pablo-image.jpg',height=142.24,width=106.68)),
-                             tabPanel("Jennifer Morales"),
+                             
+                             tabPanel( "Jennifer Morales",
+                              titlePanel("Jennifer Morales"),
+                              textOutput("jennifer"),
+                             img(src='jennifer-image.jpg', height=142.24, width=106.68)),
+                  
                              tabPanel("Ty Okazaki"))
                   
       )
     )
-  )
+)
 )
