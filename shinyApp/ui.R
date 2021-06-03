@@ -44,23 +44,37 @@ ui <- fluidPage(
     ),
     mainPanel(
       tabsetPanel(type = "tab",
-                  tabPanel("Overview", textOutput("overview")),
+                  tabPanel("Overview",titlePanel("Overview"), textOutput("overview"), 
+                           img(src= 'overview-image.jpeg',height=200, width=400)),
+                  navbarMenu("About Us",
+                             tabPanel("Pablo Aguirre",
+                                      titlePanel("Pablo Aguirre"),
+                                      textOutput("pablo"),
+                                      img(src='pablo-image.jpg',height=142.24,width=106.68)),
+                             tabPanel("Jennifer Morales"),
+                             tabPanel("Ty Okazaki")),
                   tabPanel("Graph", 
+                           titlePanel("Graph Visualizations"),
+                           textOutput("graphdesc"),
                            plotOutput("plot"),
                            plotOutput("plot1"),
-                           textOutput("graphdesc")),
+                           ),
                   tabPanel("Map",
+                           titlePanel("Geographic Visualizations"),
+                           textOutput("mapdesc"),
                            h4(strong(textOutput("label1"))),
                            plotlyOutput("map"),
                            h4(strong(textOutput("label2"))),
-                           leafletOutput("lmap"),
-                           textOutput("mapdesc")),
+                           leafletOutput("lmap")
+                           ),
                   tabPanel("Disease Mortality Table",
+                           titlePanel("Table Visualizations"),
+                           textOutput("summary"),
+                           textOutput("tabledesc"),
                            dataTableOutput("data"),
-                            textOutput("summary"),
-                            textOutput("tabledesc")),
-                  tabPanel("Insights", textOutput("conclusion")),
-                  tabPanel("About Us", textOutput("about_us"))
+                            ),
+                  tabPanel("Insights", titlePanel("Conclusions"),textOutput("conclusion"))
+                  
       )
     )
   )

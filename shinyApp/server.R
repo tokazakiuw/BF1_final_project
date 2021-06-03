@@ -222,11 +222,11 @@ server <- shinyServer(function(input, output){
     Hispanic males from 2014 to 2018, except in 2016. In 2016, the mortality rate for Hispanic
     males and females was the same (rate:53). From the same graph, you can see that Black, American 
     Indian, and Alaskan Native are the top three ethnicities in Washington with the highest mortality
-    rate for both stroke and heart disease.  The data quality wasn’t completely perfect. It lacked representation
+    rate for both stroke and heart disease.  The data quality isn't perfect. It lacked representation
     for minorities. Sometimes the data wouldn’t return data for minorities, it would just say “NA.”  Which results 
-    in biased results and also harming minorities by not giving the proper information. I think adding income level and
-    exercise level to the data set would be interesting to see how these parts play a role in the mortality rate of cardiovascular
-    diseases in the U.S.")
+    in biased results and also harming minorities by not giving the proper information. If income level, age, and
+    exercise level were added to the data set, it would be interesting to see how they play a role in the mortality rate of cardiovascular
+    diseases and strokes in the U.S.")
   })  
   
   # Render About Us
@@ -255,10 +255,25 @@ server <- shinyServer(function(input, output){
     
   })
   
-  # Render Table Description
-  output$tabledesc <- renderText({
-    
+
+  
+  #Render Overview
+  output$overview <- renderText({
+    paste0("This analysis seeks to examine heart disease and stroke mortality rates per county in the United States, and to display existing disparities in mortality 
+    rates by ethnicity and gender. This analysis uses data from the Centers for Disease Control and Prevention which documents the stroke mortality rate and 
+           heart disease mortality rate by county, ethnicity, and gender.  Data was compiled from 10 individual datasets provided by the CDC, 5 for each cause of death, and is displayed in 
+           2 bar graphs, a map plot, a leaflet plot, and a table, each with unique and pertinent insights derived from the data. 
+           ")
     
   })
   
+  #Render About Us Bios
+  
+  #Pablo Aguirre
+  output$pablo <- renderText({
+    paste0("Hello, I am a 3rd year pursuing a major in Economics.  My interests are in global finance legislation, business, and technology.  On the weekends, I enjoy spending time with 
+           my friends and family and going outside!")
+  })
+  
 })
+
