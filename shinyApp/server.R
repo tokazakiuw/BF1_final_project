@@ -288,6 +288,11 @@ server <- shinyServer(function(input, output){
       paste0("Hey, I'm a first year hoping to major in Informatics. I enjoy working out, scrolling through TikTok, and hanging out with
              friends and family.")
     })
+    #Ty Okazaki 
+    output$ty <- renderText({
+      paste0("Hello! My name is Ty and I'm a first year student intending to major in Economics or Data Science. On my free time I enjoy 
+             playing/listening to music, spending time with my friends, and programming. I also have a pet dog named Yumi")
+    })
 })
 
   
