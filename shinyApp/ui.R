@@ -68,9 +68,12 @@ ui <- fluidPage(
                            titlePanel("Table Visualizations"),
                            textOutput("tabledesc"), br(),
                            dataTableOutput("data"), br(),
+                           titlePanel("Highest Rate of Mortality for Each Ethnicity"),
                            textOutput("summary")
                             ),
-                  tabPanel("Insights", titlePanel("Conclusions"),textOutput("conclusion"),br(),
+                  tabPanel("Insights",
+                           titlePanel("Conclusions"),
+                           textOutput("conclusion"),br(),
                            plotOutput("lineplot")),
                   navbarMenu( "About Us",
                              tabPanel("Pablo Aguirre",

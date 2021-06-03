@@ -227,11 +227,6 @@ server <- shinyServer(function(input, output){
     diseases and strokes in the U.S.")
   })  
   
-  # Render About Us
-  output$about_us <- renderText({
-    
-   
-  })
 
   # Plot & Table Descriptions
   # Render Graph Description
@@ -331,6 +326,7 @@ server <- shinyServer(function(input, output){
              x = paste("Years"))
     }
   })
+  
 })
 
   
