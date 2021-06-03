@@ -179,7 +179,7 @@ server <- shinyServer(function(input, output){
           filter(State == input$State) %>% 
           filter(Gender == input$Gender) %>%
           filter(!is.na(Data_Value)) %>% 
-          select(-GeographicLevel, -Location.1, -Georeference.Column)
+          select(-GeographicLevel, -Location.1, -Georeferenced.Column)
       }
   })
       
@@ -188,30 +188,30 @@ server <- shinyServer(function(input, output){
     #What Ethnicity has the highest rate of mortality from heart disease
     if(input$Disease == "Heart Disease"){ 
    highestVar <- hd_mortality_combined %>%
-     select(Year, State, Gender,Ethnicity, Data_Value) %>%
         filter(Year == input$Year) %>% 
         filter(State == input$State) %>%
         filter(Gender == input$Gender) %>%
         filter(!is.na(Data_Value)) %>% 
         group_by(Ethnicity) %>% 
         summarize(highest = max(Data_Value)) %>% 
+        arrange(desc(highest)) %>% 
      mutate(Ethnicity= paste(Ethnicity)) %>% 
      mutate(highest= paste(highest))
-  paste("The highest value for heart disease for",highestVar$Ethnicity, "is", highestVar$highest, ". ")
-
+  paste0(highestVar$Ethnicity, ": ", highestVar$highest,", " )
+   
   }
     else{ 
     highestVar2 <- stroke_mortality_combined %>% 
-      select(Year, State, Gender,Ethnicity, Data_Value) %>%
             filter(Year == input$Year) %>% 
             filter(State == input$State) %>% 
             filter(Gender == input$Gender) %>% 
             filter(!is.na(Data_Value)) %>% 
             group_by(Ethnicity) %>% 
             summarize(highest = max(Data_Value)) %>% 
+            arrange(desc(highest)) %>% 
       mutate(Ethnicity= paste(Ethnicity)) %>% 
       mutate(highest= paste(highest))
- paste("The highest value for stroke for",highestVar$Ethnicity, "is", highestVar$highest,". " )
+ paste0(highestVar2$Ethnicity, ": ", highestVar2$highest,", " )
     }
  })
 
