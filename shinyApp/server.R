@@ -185,7 +185,7 @@ server <- shinyServer(function(input, output){
       
   # Render Summary
   output$summary <- renderText({
-    #What Ethnicity has the highest rate of mortality from heart disease
+    #the highest rate of mortality from heart disease/stroke by Ethnicity 
     if(input$Disease == "Heart Disease"){ 
    highestVar <- hd_mortality_combined %>%
         filter(Year == input$Year) %>% 
@@ -222,8 +222,8 @@ server <- shinyServer(function(input, output){
     Hispanic males from 2014 to 2018, except in 2016. In 2016, the mortality rate for Hispanic
     males and females was the same (rate:53). From the same graph, you can see that Black, American 
     Indian, and Alaskan Native are the top three ethnicities in Washington with the highest mortality
-    rate for both stroke and heart disease. If income level, age, and
-    exercise level were added to the data set, it would be interesting to see how they play a role in the mortality rate of cardiovascular
+    rate for both stroke and heart disease. If income level, age, and exercise level were added to the 
+    data set, it would be interesting to see how they play a role in the mortality rate of cardiovascular
     diseases and strokes in the U.S.")
   })  
   
