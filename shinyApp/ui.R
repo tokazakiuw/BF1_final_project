@@ -52,13 +52,13 @@ ui <- fluidPage(
                            img(src= 'cardiovasculardisease.jpeg',height=200, width=300)),
                   tabPanel("Graph", 
                            titlePanel("Graph Visualizations"),
-                           textOutput("graphdesc"), br(),
+                           h4(textOutput("graphdesc")), br(),
                            plotOutput("plot"), br(),
                            plotOutput("plot1")
                            ),
                   tabPanel("Map",
                            titlePanel("Geographic Visualizations"),
-                           textOutput("mapdesc"), br(),
+                           h4(textOutput("mapdesc")), br(),
                            h4(strong(textOutput("label1"))),
                            plotlyOutput("map"), br(),
                            h4(strong(textOutput("label2"))),
@@ -66,29 +66,29 @@ ui <- fluidPage(
                            ),
                   tabPanel("Disease Mortality Table",
                            titlePanel("Table Visualizations"),
-                           textOutput("tabledesc"), br(),
+                           h4(textOutput("tabledesc")), br(),
                            dataTableOutput("data"), br(),
                            titlePanel("Highest Rate of Mortality for Each Ethnicity"),
-                           textOutput("summary")
+                           h4(textOutput("summary"))
                             ),
                   tabPanel("Insights",
                            titlePanel("Conclusions"),
-                           textOutput("conclusion"),br(),
+                          h4(textOutput("conclusion")),br(),
                            plotOutput("lineplot")),
                   navbarMenu( "About Us",
                              tabPanel("Pablo Aguirre",
                                       titlePanel("Pablo Aguirre"),
-                                      textOutput("pablo"),
+                                      h4(textOutput("pablo")),
                                       img(src='pablo-image.jpg',height=142.24,width=106.68)),
                              
                              tabPanel( "Jennifer Morales",
                               titlePanel("Jennifer Morales"),
-                              textOutput("jennifer"),
+                             h4(textOutput("jennifer")),
                              img(src='jennifer-image.jpg', height=142.24, width=106.68)),
                   
                              tabPanel("Ty Okazaki",
                               titlePanel("Ty Okazaki"),
-                              textOutput("ty"),
+                              h4(textOutput("ty")),
                               img(src='yumi.JPG', height=300, width=400))
                   
                           )
