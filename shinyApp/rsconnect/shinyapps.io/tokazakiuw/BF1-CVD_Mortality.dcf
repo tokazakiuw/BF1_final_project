@@ -1,0 +1,13 @@
+name: BF1-CVD_Mortality
+title: BF1-CVD_Mortality
+username:
+account: tokazakiuw
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4224408
+bundleId: 4674538
+url: https://tokazakiuw.shinyapps.io/BF1-CVD_Mortality/
+when: 1622749227.31994
+lastSyncTime: 1622749227.31996
+asMultiple: FALSE
+asStatic: FALSE
