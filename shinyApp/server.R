@@ -309,7 +309,7 @@ server <- shinyServer(function(input, output){
         ggplot(aes(x=Year, y=Data_Value, group=Ethnicity,color=Ethnicity)) +
         geom_line() +
        # theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
-        labs(title = paste0(input$Gender, " ", input$Disease, " Mortality Rates Over Time Grouped by Ethnicity in ", input$State, " (", input$Year, ")"),
+        labs(title = paste0(input$Gender, " ", input$Disease, " Mortality Rates Over Time Grouped by Ethnicity in ", input$State),
              fill = paste("Ethnicity Labels"),
              y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
              x = paste("Years"))
@@ -325,7 +325,7 @@ server <- shinyServer(function(input, output){
         ggplot(aes(x=Year, y=Data_Value, grpup=Ethnicity,color=Ethnicity)) +
         geom_line() +
         # theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
-        labs(title = paste0(input$Gender, " ", input$Disease, " Mortality Rates Over Time Grouped by Ethnicity in ", input$State, " (", input$Year, ")"),
+        labs(title = paste0(input$Gender, " ", input$Disease, " Mortality Rates Over Time Grouped by Ethnicity in ", input$State),
              fill = paste("Ethnicity Labels"),
              y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
              x = paste("Years"))
