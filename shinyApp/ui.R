@@ -18,7 +18,7 @@ source("analysis.R")
 # Define UI
 
 ui <- fluidPage(
-  titlePanel("Cardiovascular Diseases in the U.S"),
+  titlePanel("Cardiovascular Disease Mortality in the U.S"),
   sidebarLayout(
     sidebarPanel(
       # Select Year Range
@@ -45,10 +45,10 @@ ui <- fluidPage(
     mainPanel(
       tabsetPanel(type = "tab",
                   tabPanel("Overview",titlePanel("Overview"), 
-                           img(src= 'overview-image.jpeg',height=300, width=600),
-                           textOutput("overview"), 
-                           img(src= 'heart-stroke.jpeg',height=300, width=300),
-                           img(src= 'cardiovasculardisease.jpeg',height=300, width=300)),
+                           h4(textOutput("overview")), br(), 
+                           img(src= 'overview-image.jpeg',height=300, width=600), br(),
+                           img(src= 'heart-stroke.jpeg',height=200, width=300),
+                           img(src= 'cardiovasculardisease.jpeg',height=200, width=300)),
                   navbarMenu("About Us",
                              tabPanel("Pablo Aguirre",
                                       titlePanel("Pablo Aguirre"),
@@ -58,23 +58,23 @@ ui <- fluidPage(
                              tabPanel("Ty Okazaki")),
                   tabPanel("Graph", 
                            titlePanel("Graph Visualizations"),
-                           textOutput("graphdesc"),
-                           plotOutput("plot"),
+                           textOutput("graphdesc"), br(),
+                           plotOutput("plot"), br(),
                            plotOutput("plot1"),
                            ),
                   tabPanel("Map",
                            titlePanel("Geographic Visualizations"),
-                           textOutput("mapdesc"),
+                           textOutput("mapdesc"), br(),
                            h4(strong(textOutput("label1"))),
-                           plotlyOutput("map"),
+                           plotlyOutput("map"), br(),
                            h4(strong(textOutput("label2"))),
                            leafletOutput("lmap")
                            ),
                   tabPanel("Disease Mortality Table",
                            titlePanel("Table Visualizations"),
+                           textOutput("tabledesc"), br(),
+                           dataTableOutput("data"), br(),
                            textOutput("summary"),
-                           textOutput("tabledesc"),
-                           dataTableOutput("data"),
                             ),
                   tabPanel("Insights", titlePanel("Conclusions"),textOutput("conclusion"))
                   
