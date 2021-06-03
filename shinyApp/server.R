@@ -294,6 +294,43 @@ server <- shinyServer(function(input, output){
       paste0("Hello! My name is Ty and I'm a first year student intending to major in Economics or Data Science. On my free time I enjoy 
              playing/listening to music, spending time with my friends, and programming. I also have a pet dog named Yumi")
     })
+    
+  #Render Insights Line PLot
+    
+  output$lineplot <- renderPlot({
+    if(input$Disease == "Heart Disease") {
+      hd_mortality_combined %>% 
+        filter(State == input$State) %>% 
+        filter(Gender == input$Gender) %>%
+        filter(GeographicLevel == "State") %>% 
+        filter(!is.na(Data_Value)) %>% 
+        group_by(Ethnicity) %>% 
+        arrange(desc(Data_Value)) %>% 
+        ggplot(aes(x=Year, y=Data_Value, group=Ethnicity,color=Ethnicity)) +
+        geom_line() +
+       # theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
+        labs(title = paste0(input$Gender, " ", input$Disease, " Mortality Rates Over Time Grouped by Ethnicity in ", input$State),
+             fill = paste("Ethnicity Labels"),
+             y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
+             x = paste("Years"))
+        
+    }else {
+      stroke_mortality_combined %>% 
+        filter(State == input$State) %>% 
+        filter(Gender == input$Gender) %>%
+        filter(GeographicLevel == "State") %>% 
+        filter(!is.na(Data_Value)) %>% 
+        group_by(Ethnicity) %>% 
+        arrange(desc(Data_Value)) %>% 
+        ggplot(aes(x=Year, y=Data_Value, grpup=Ethnicity,color=Ethnicity)) +
+        geom_line() +
+        # theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
+        labs(title = paste0(input$Gender, " ", input$Disease, " Mortality Rates Over Time Grouped by Ethnicity in ", input$State),
+             fill = paste("Ethnicity Labels"),
+             y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
+             x = paste("Years"))
+    }
+  })
 })
 
   

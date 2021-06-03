@@ -70,7 +70,8 @@ ui <- fluidPage(
                            dataTableOutput("data"), br(),
                            textOutput("summary")
                             ),
-                  tabPanel("Insights", titlePanel("Conclusions"),textOutput("conclusion")),
+                  tabPanel("Insights", titlePanel("Conclusions"),textOutput("conclusion"),br(),
+                           plotOutput("lineplot")),
                   navbarMenu( "About Us",
                              tabPanel("Pablo Aguirre",
                                       titlePanel("Pablo Aguirre"),
