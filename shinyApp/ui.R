@@ -49,13 +49,6 @@ ui <- fluidPage(
                            img(src= 'overview-image.jpeg',height=300, width=600), br(),
                            img(src= 'heart-stroke.jpeg',height=200, width=300),
                            img(src= 'cardiovasculardisease.jpeg',height=200, width=300)),
-                  navbarMenu("About Us",
-                             tabPanel("Pablo Aguirre",
-                                      titlePanel("Pablo Aguirre"),
-                                      textOutput("pablo"),
-                                      img(src='pablo-image.jpg',height=142.24,width=106.68)),
-                             tabPanel("Jennifer Morales"),
-                             tabPanel("Ty Okazaki")),
                   tabPanel("Graph", 
                            titlePanel("Graph Visualizations"),
                            textOutput("graphdesc"), br(),
@@ -76,7 +69,14 @@ ui <- fluidPage(
                            dataTableOutput("data"), br(),
                            textOutput("summary"),
                             ),
-                  tabPanel("Insights", titlePanel("Conclusions"),textOutput("conclusion"))
+                  tabPanel("Insights", titlePanel("Conclusions"),textOutput("conclusion")),
+                  navbarMenu("About Us",
+                             tabPanel("Pablo Aguirre",
+                                      titlePanel("Pablo Aguirre"),
+                                      textOutput("pablo"),
+                                      img(src='pablo-image.jpg',height=142.24,width=106.68)),
+                             tabPanel("Jennifer Morales"),
+                             tabPanel("Ty Okazaki"))
                   
       )
     )
