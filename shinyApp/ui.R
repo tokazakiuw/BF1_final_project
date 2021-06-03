@@ -44,8 +44,11 @@ ui <- fluidPage(
     ),
     mainPanel(
       tabsetPanel(type = "tab",
-                  tabPanel("Overview",titlePanel("Overview"), textOutput("overview"), 
-                           img(src= 'overview-image.jpeg',height=200, width=400)),
+                  tabPanel("Overview",titlePanel("Overview"), 
+                           img(src= 'overview-image.jpeg',height=300, width=600),
+                           textOutput("overview"), 
+                           img(src= 'heart-stroke.jpeg',height=300, width=300),
+                           img(src= 'cardiovasculardisease.jpeg',height=300, width=300)),
                   navbarMenu("About Us",
                              tabPanel("Pablo Aguirre",
                                       titlePanel("Pablo Aguirre"),
