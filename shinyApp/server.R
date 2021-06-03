@@ -254,8 +254,17 @@ server <- shinyServer(function(input, output){
            and in the lower plot we see how these mortality rates compare against specific counties in a selected state.")
     
   })
-  
 
+  # Render Table Description
+  output$tabledesc <- renderText({
+    paste0("This tables represent the ", input$Gender, " ",input$Disease, " Mortality Rates for ", input$State, " State in Year ", input$Year,
+           ". Gathered from averaged CDC (Centers for Disease Control and Prevention) Cardiovascular Disease Mortality data among US adults (age 35+), 
+           we can plot instances by certain variables to gain insights. By showing the underlying numeric values which drive the visualizations for various plots, 
+           we can get a better understanding of the data and its significance. By showing variables highlighted in the plots prior such as location, gender, and ethnicity, 
+           we see the plethora of observations which construct the dataset. Along with verifying our visualizations with these numeric tables, we can reinforce our credibility 
+           by showing the dataset and allowing for user exploration.")
+    
+  })
   
   #Render Overview
   output$overview <- renderText({
