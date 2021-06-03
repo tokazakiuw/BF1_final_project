@@ -75,10 +75,15 @@ ui <- fluidPage(
                                       titlePanel("Pablo Aguirre"),
                                       textOutput("pablo"),
                                       img(src='pablo-image.jpg',height=142.24,width=106.68)),
+                             
                              tabPanel("Jennifer Morales"),
+                              titlePanel("Jennifer Morales"),
+                             textOutput("jennifer"),
+                             img(src='jennifer-image.jpg', height=142.24, width=106.68)),
+                  
                              tabPanel("Ty Okazaki"))
                   
       )
     )
   )
-)
+

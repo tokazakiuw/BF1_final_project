@@ -283,6 +283,13 @@ server <- shinyServer(function(input, output){
     paste0("Hello, I am a 3rd year pursuing a major in Economics.  My interests are in global finance legislation, business, and technology.  On the weekends, I enjoy spending time with 
            my friends and family and going outside!")
   })
-  
+    #Jennifer Morales 
+    output$jennifer <- renderText({
+      paste0("Hey, I'm a first year hoping to major in Informatics. I enjoy working out, scrolling through TikTok, and hanging out with
+             friends and family.")
+    })
 })
+
+  
+
 
