@@ -171,15 +171,13 @@ server <- shinyServer(function(input, output){
           filter(Year == input$Year) %>% 
           filter(State == input$State) %>% 
           filter(Gender == input$Gender) %>% 
-          filter(!is.na(Data_Value)) %>% 
-          select(Year, State, LocationDesc, GeographicLevel, Topic, Data_Value, Data_Value_Unit, Data_Value_Type, Gender, Ethnicity)
+          filter(!is.na(Data_Value))
       } else {
         stroke_mortality_combined %>% 
           filter(Year == input$Year) %>% 
           filter(State == input$State) %>% 
           filter(Gender == input$Gender) %>%
-          filter(!is.na(Data_Value)) %>% 
-          select(Year, State, LocationDesc, GeographicLevel, Topic, Data_Value, Data_Value_Unit, Data_Value_Type, Gender, Ethnicity)
+          filter(!is.na(Data_Value)) 
       }
   })
       
