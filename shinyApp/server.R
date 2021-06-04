@@ -373,6 +373,12 @@ server <- shinyServer(function(input, output){
                x = paste("Top", input$State, "Counties"))
       }
   })
+  output$findings.counties <- renderText({
+    paste0("Although our data did not include income level, I was able to look up the median salary 
+    for some couties, such as the top 5 counties with the highest cardiovascular disease in California(2014).
+        The top 5 counties in California are considered low-income. Given this, it makes sense why they have
+           such a high mortality rate.")
+  })
 })
 
 
