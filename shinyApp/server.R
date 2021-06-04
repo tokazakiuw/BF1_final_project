@@ -327,8 +327,14 @@ server <- shinyServer(function(input, output){
     }
   })
   
+  #Description on linePlot under insights
+  output$lineplot.desc <- renderText({
+    paste0("This map represents the"," ",input$Gender, " ", input$Disease," " ,"mortality rates for"," ",
+           input$State," " ,"state in year"," ", input$Year)
+ })
 })
 
-  
+
+
 
 

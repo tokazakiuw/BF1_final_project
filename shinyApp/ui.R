@@ -74,7 +74,9 @@ ui <- fluidPage(
                   tabPanel("Insights",
                            titlePanel("Conclusions"),
                           h4(textOutput("conclusion")),br(),
-                           plotOutput("lineplot")),
+                           plotOutput("lineplot"),
+                          h4(textOutput("lineplot.desc"))),
+                          
                   navbarMenu( "About Us",
                              tabPanel("Pablo Aguirre",
                                       titlePanel("Pablo Aguirre"),
