@@ -329,10 +329,52 @@ server <- shinyServer(function(input, output){
   
   #Description on linePlot under insights
   output$lineplot.desc <- renderText({
-    paste0("This map represents the"," ",input$Gender, " ", input$Disease," " ,"mortality rates for"," ",
-           input$State," " ,"state in year"," ", input$Year)
+    paste0("This line plot represents the"," ",input$Gender, " ", input$Disease," " ,"mortality rates for"," ",
+     input$State," " ,"state in year"," ", input$Year)
  })
+  #Insight:top 5 counties per state. 
+  output$top.counties <- renderPlot({
+      if(input$Disease == "Heart Disease") {
+        hd_mortality_combined %>% 
+          filter(Year == input$Year) %>% 
+          filter(State == input$State) %>% 
+          filter(Gender == input$Gender) %>% 
+          filter(!is.na(Data_Value)) %>% 
+          group_by(LocationDesc) %>% 
+          arrange(desc(Data_Value)) %>% 
+          ungroup %>% 
+          top_n(5, Data_Value) %>% 
+          ggplot(aes(x=reorder(LocationDesc, Data_Value), y=Data_Value, fill=LocationDesc)) +
+          geom_col() +
+          theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
+          labs(title = paste0(title = paste0("Top Counties in", " ", input$State, "(", input$Year, ") ", "with highest", " ",
+                                             input$Gender,  " ", input$Disease, " ", "mortality rate")),
+                           
+              fill = paste(input$State, "Counties"),
+               y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
+               x = paste("Top", input$State, "Counties"))
+      }
+    else {
+        stroke_mortality_combined %>% 
+          filter(Year == input$Year) %>% 
+          filter(State == input$State) %>% 
+          filter(!is.na(Data_Value)) %>% 
+          group_by(LocationDesc) %>% 
+          arrange(desc(Data_Value)) %>% 
+          ungroup %>% 
+          top_n(5, Data_Value) %>% 
+          ggplot(aes(x=reorder(LocationDesc, Data_Value), y=Data_Value, fill=LocationDesc)) +
+          geom_col() +
+          theme(axis.text.x = element_text(angle=45, hjust = 1, siz = 8)) +
+          labs(title = paste0("Top Counties in", " ", input$State, "(", input$Year, ") ", "with highest", 
+                             " ", input$Disease, " ", "mortality rate"),
+               fill = paste(input$State, "Counties"),
+               y = paste(input$Disease, "Morality Rates (#/100000 Pop)"),
+               x = paste("Top", input$State, "Counties"))
+      }
+  })
 })
+
 
 
 
