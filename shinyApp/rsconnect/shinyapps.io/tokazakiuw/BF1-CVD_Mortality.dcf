@@ -5,9 +5,9 @@ account: tokazakiuw
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4224408
-bundleId: 4674886
+bundleId: 4674930
 url: https://tokazakiuw.shinyapps.io/BF1-CVD_Mortality/
-when: 1622754771.32737
-lastSyncTime: 1622754771.32738
+when: 1622755517.16895
+lastSyncTime: 1622755517.16896
 asMultiple: FALSE
 asStatic: FALSE
