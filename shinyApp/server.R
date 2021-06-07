@@ -379,6 +379,12 @@ server <- shinyServer(function(input, output){
         The top 5 counties in California are considered low-income. Given this, it makes sense why they have
            such a high mortality rate.")
   })
+  
+  output$insights_time <- renderText({
+    paste0("The graph below shows the ",input$Disease," mortality rate over time in ",input$State,
+          " state over time, separated by ethnicity.  It is clear to see a general trend that that for all ethnicities mortality rates have stayed fairly constant, 
+          but interaction with this graph if it is continuously updated would be useful in examining metrics of racial equity. " )
+  })
 })
 
 
